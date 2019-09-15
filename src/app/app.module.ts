@@ -5,12 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
 import { PlaylistComponent } from './playlist/playlist.component';
+import { AlbumComponent } from './album/album.component';
+import { AlbumCollectionComponent } from './album-collection/album-collection.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    AlbumComponent,
+    AlbumCollectionComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,225 @@
+{
+    "playlists": [
+        {
+            "id": 0,
+            "playlist_name": "Playlist 1",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/key.jpg"
+        },
+        {
+            "id": 1,
+            "playlist_name": "Playlist 2",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/ask-the-dust.jpg"
+        },
+        {
+            "id": 2,
+            "playlist_name": "Playlist 3",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/anvil.jpg"
+        },
+        {
+            "id": 3,
+            "playlist_name": "Playlist 4",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg"
+        },
+        {
+            "id": 4,
+            "playlist_name": "Playlist 5",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg"
+        },
+        {
+            "id": 5,
+            "playlist_name": "Playlist 6",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/key.jpg"
+        }
+    ],
+    "full_playlists": [
+        {
+            "playlist_name": "Playlist 1",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/key.jpg",
+            "songs": [
+                {
+                    "name": "6 AM",
+                    "artist": "J Balvin",
+                    "album": "Album x",
+                    "url": "/assets/songs/6am.mp3",
+                    "cover_art_url": ""
+                },
+                {
+                    "name": "Ay Vamos",
+                    "artist": "J Balvin",
+                    "album": "Album X",
+                    "url": "/assets/songs/ay_vamos.mp3",
+                    "cover_art_url": ""
+                },
+                {
+                    "name": "Danza Kuduro",
+                    "artist": "Don Omar",
+                    "album": "Album X",
+                    "url": "/assets/songs/danza_kuduro.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/die-digital.jpg"
+                },
+                {
+                    "name": "Mal de Amores",
+                    "artist": "Juan Magán",
+                    "album": "Album X",
+                    "url": "/assets/songs/mal_de_amores.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-but-hunks-of-wood.jpg"
+                }
+            ]
+        },
+        {
+            "playlist_name": "Playlist 2",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg",
+            "songs": [
+                {
+                    "name": "Terrain",
+                    "artist": "pg.lost",
+                    "album": "Key",
+                    "url": "https://521dimensions.com/song/Terrain-pglost.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/key.jpg"
+                },
+                {
+                    "name": "Vorel",
+                    "artist": "Russian Circles",
+                    "album": "Guidance",
+                    "url": "https://521dimensions.com/song/Vorel-RussianCircles.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
+                },
+                {
+                    "name": "Intro / Sweet Glory",
+                    "artist": "Jimkata",
+                    "album": "Die Digital",
+                    "url": "https://521dimensions.com/song/IntroSweetGlory-Jimkata.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/die-digital.jpg"
+                },
+                {
+                    "name": "Offcut #6",
+                    "artist": "Little People",
+                    "album": "We Are But Hunks of Wood Remixes",
+                    "url": "https://521dimensions.com/song/Offcut6-LittlePeople.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-but-hunks-of-wood.jpg"
+                },
+                {
+                    "name": "Dusk To Dawn",
+                    "artist": "Emancipator",
+                    "album": "Dusk To Dawn",
+                    "url": "https://521dimensions.com/song/DuskToDawn-Emancipator.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/from-dusk-to-dawn.jpg"
+                },
+                {
+                    "name": "Anthem",
+                    "artist": "Emancipator",
+                    "album": "Soon It Will Be Cold Enough",
+                    "url": "https://521dimensions.com/song/Anthem-Emancipator.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg"
+                }
+            ]
+        },
+        {
+            "playlist_name": "Playlist 3",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/die-digital.jpg",
+            "songs": [
+                {
+                    "name": "Can't Stop me",
+                    "artist": "Afrojack",
+                    "album": "Album Y",
+                    "url": "/assets/songs/cant_stop_me.mp3",
+                    "cover_art_url": ""
+                },
+                {
+                    "name": "Creep",
+                    "artist": "Radiohead",
+                    "album": "Album Y",
+                    "url": "/assets/songs/creep.mp3",
+                    "cover_art_url": ""
+                },
+                {
+                    "name": "Firestone",
+                    "artist": "Kygo",
+                    "album": "Album Y",
+                    "url": "/assets/songs/firestone.mp3",
+                    "cover_art_url": ""
+                },
+                {
+                    "name": "Hey There Delilah",
+                    "artist": "Plain White Ts",
+                    "album": "Album Y",
+                    "url": "/assets/songs/hey_there_delila.mp3",
+                    "cover_art_url": ""
+                }            ]
+        },
+        {
+            "playlist_name": "Playlist 4",
+            "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/key.jpg",
+            "songs": [
+                {
+                    "name": "I don't wanna miss a thing",
+                    "artist": "Aerosmith",
+                    "album": "Album Z",
+                    "url": "/assets/songs/i_dont_wanna_miss_a_thing.mp3",
+                    "cover_art_url": ""
+                },
+                {
+                    "name": "Mariposas",
+                    "artist": "Enanitos Verdes",
+                    "album": "Album Z",
+                    "url": "/assets/songs/mariposas.mp3",
+                    "cover_art_url": ""
+                },
+                {
+                    "name": "Midnight Sun",
+                    "artist": "Jimkata",
+                    "album": "Album Z",
+                    "url": "/assets/songs/midnight_sun.mp3",
+                    "cover_art_url": ""
+                },
+                {
+                    "name": "Photograph",
+                    "artist": "Ed Sheeran",
+                    "album": "Album Z",
+                    "url": "/assets/songs/photograph.mp3",
+                    "cover_art_url": ""
+                }
+            ]
+        },
+        {
+            "playlist_name": "Playlist 5",
+            "cover_art_url": "http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png",
+            "songs": [
+                {"name":"Piensas",
+                 "artist": "Pitbull",
+                 "album": "Album W",
+                 "url": "/assets/songs/piensas.mp3",
+                 "cover_art_url": ""},
+                {"name":"Scars",
+                 "artist": "Papa Roach",
+                 "album": "Album W",
+                 "url": "/assets/songs/scars.mp3",
+                 "cover_art_url": ""},
+                {"name":"The Lazy Song",
+                 "artist": "Bruno Mars",
+                 "album": "Album W",
+                 "url": "/assets/songs/the_lazy_song.mp3",
+                 "cover_art_url": ""},
+                {"name":"Yo también",
+                 "artist": "Marc Anthony",
+                 "album": "Album W",
+                 "url": "/assets/songs/yo_tambien.mp3",
+                 "cover_art_url": ""}
+            ]
+        },
+        {
+            "playlist_name": "Playlist 4",
+            "cover_art_url": "http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png",
+            "songs": [
+                {"name":"", "artist": "", "album": "", "url": "", "cover_art_url": ""}
+            ]
+        },
+        {
+            "playlist_name": "Playlist 5",
+            "cover_art_url": "http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png",
+            "songs": [
+                {"name":"", "artist": "", "album": "", "url": "", "cover_art_url": ""}
+            ]
+        }
+    ]
+}

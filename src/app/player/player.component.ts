@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AmplitudeService } from '../amplitude.service';
+import { Song } from '../song';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
@@ -8,14 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class PlayerComponent implements OnInit {
 
     playlistOpened = false;
-    constructor() { }
+    songs: Array<object>;
+    constructor(private ampService: AmplitudeService) { }
 
     ngOnInit() {
+        this.ampService.startAmplitude();
     }
     togglePlaylist() {
-        console.log('Showing playlist');
-
         this.playlistOpened = !this.playlistOpened;
     }
 
+    addSong(song: Song) {
+        this.ampService.addSong(song);
+    }
+
+    playSongAtIndex(i: number) {
+        this.ampService.playSongAtIndex(i);
+    }
 }
