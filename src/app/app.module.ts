@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
@@ -8,6 +7,8 @@ import { PlaylistComponent } from './playlist/playlist.component';
 import { AlbumComponent } from './album/album.component';
 import { AlbumCollectionComponent } from './album-collection/album-collection.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -19,8 +20,15 @@ import { NavbarComponent } from './navbar/navbar.component';
     NavbarComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+      BrowserModule,
+      AppRoutingModule,
+      BrowserAnimationsModule,
+      SimpleNotificationsModule.forRoot({
+          position: ['bottom', 'right'],
+          timeOut: 5000,
+          showProgressBar: true,
+          maxStack: 3
+      })
   ],
   providers: [],
   bootstrap: [AppComponent]
