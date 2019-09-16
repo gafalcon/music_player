@@ -69,9 +69,14 @@
             <div *ngFor="let song of ampService.currentSongs; index as i;" class="white-player-playlist-song amplitude-song-container" [attr.data-amplitude-song-index]="i" (click)="playSongAtIndex(i)">
                 <img src="{{ song.cover_art_url ? song.cover_art_url : 'http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png' }}" />
 
-                <div class="playlist-song-meta">
+               <div class="playlist-song-meta">
                     <span class="playlist-song-name">{{ song.name }}</span>
                     <span class="playlist-artist-album">{{ song.album }}</span>
+                </div>
+                <div class="song-buttons" (click)="removeSong($event, i)" >
+                    <a >
+                        <img src="/assets/img/close.svg" class="remove-button" />
+                    </a>
                 </div>
             </div>
         </div>

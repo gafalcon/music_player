@@ -374,7 +374,8 @@ div.white-player-playlist-song {
   div.white-player-playlist-song div.playlist-song-meta {
     float: left;
     margin-left: 15px;
-    width: calc( 100% - 80px ); }
+    /* width: calc( 100% - 80px ); */
+  }
     div.white-player-playlist-song div.playlist-song-meta span.playlist-song-name {
       color: #414344;
       font-size: 14px;
@@ -507,15 +508,11 @@ body {
   -webkit-font-smoothing: antialiased;
   font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
   line-height: 1.5; }
-  body div.example-container {
-    width: 100%;
-    display: flex; }
-    body div.example-container div.left {
-      width: 50%; }
-    body div.example-container div.right {
+    body div.container-fluid div.right {
       width: 100%;
       display: flex;
-      flex-wrap: wrap; }
+      flex-wrap: wrap;
+    }
 
 @media screen and (max-width: 39.9375em) {
   body div.example-container {

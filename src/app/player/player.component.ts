@@ -26,4 +26,9 @@ export class PlayerComponent implements OnInit {
     playSongAtIndex(i: number) {
         this.ampService.playSongAtIndex(i);
     }
+
+    removeSong(event: Event, songId: number) {
+        event.stopPropagation();
+        this.ampService.removeSong(songId);
+    }
 }

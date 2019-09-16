@@ -36,7 +36,7 @@ div.white-player-playlist-song img {
     margin-top: 20px;
 }
 .playlist-description img {
-    width: 50%;
+    max-width: 450px;
 }
 .song-list {
     margin-top: 10px;

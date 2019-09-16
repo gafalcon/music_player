@@ -9,6 +9,7 @@ import { AlbumCollectionComponent } from './album-collection/album-collection.co
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { NewSongComponent } from './new-song/new-song.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     PlaylistComponent,
     AlbumComponent,
     AlbumCollectionComponent,
-    NavbarComponent
+    NavbarComponent,
+    NewSongComponent
   ],
   imports: [
       BrowserModule,

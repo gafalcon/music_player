@@ -12,7 +12,7 @@ export class AmplitudeService {
     constructor(
         private api: ApiService,
         private notifier: NotificationsService
-               ) { }
+    ) { }
 
     songsToAdd = [
   {
@@ -98,4 +98,8 @@ export class AmplitudeService {
         Amplitude.playSongAtIndex( songIndex );
     }
 
+    removeSong(songIndex: number) {
+        Amplitude.removeSong(songIndex);
+        Amplitude.bindNewElements();
+    }
 }
