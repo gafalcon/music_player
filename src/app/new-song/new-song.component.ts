@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray} from '@angular/forms';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-new-song',
@@ -20,8 +21,9 @@ export class NewSongComponent implements OnInit {
     mediaFile: File;
 
     form: FormGroup;
+    albums: Array<object>;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
         this.form = this.formBuilder.group({
             name: [''],
             genres: this.formBuilder.array([]),
@@ -40,6 +42,11 @@ export class NewSongComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.apiService.getAlbums(0).subscribe(
+             albums => {this.albums = albums;
+                        console.log(albums);
+            }
+        );
     }
 
     onSubmit() {

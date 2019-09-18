@@ -56,6 +56,10 @@ export class ApiService {
         return of(data.playlists);
     }
 
+    getAlbums(userId: number): Observable<Array<object>> {
+        return of(data.albums);
+    }
+
     getPlaylist(id): Observable<Playlist> {
         return of(data.full_playlists[id]);
     }
