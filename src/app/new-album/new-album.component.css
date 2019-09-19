@@ -1,0 +1,22 @@
+
+.upload-form {
+    background-color: white;
+    margin-top: 15px;
+    /* width: 500px; */
+    padding: 20px;
+}
+.new-album-link{
+    float: right;
+}
+
+img{
+    width: 100%;
+}
+
+.btn-add-song{
+    float: right;
+}
+
+.form-row {
+    margin-bottom: 5px;
+}

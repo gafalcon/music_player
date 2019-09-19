@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NewSongComponent } from './new-song/new-song.component';
+import { NewAlbumComponent } from './new-album/new-album.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NewSongComponent } from './new-song/new-song.component';
     AlbumComponent,
     AlbumCollectionComponent,
     NavbarComponent,
-    NewSongComponent
+    NewSongComponent,
+    NewAlbumComponent
   ],
   imports: [
       BrowserModule,

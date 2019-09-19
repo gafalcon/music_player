@@ -1,0 +1,61 @@
+<div class="container upload-form">
+    <div class="row">
+        <div class="col">
+            <h1>New Album</h1>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-4">
+                        <img class="" [src]=" coverArtUrl">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Cover Art Image</label>
+                            <input #file type="file" accept="image/*" class="form-control-file" id="exampleFormControlFile1" formControlName="cover_art_img" (change)="imageSelected(file.files)">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Name</label>
+                            <input type="tex" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Artist</label>
+                            <input type="tex" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="author">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Release Date</label>
+                            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="release_date">
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col">
+                        <h2>List of Songs</h2>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-primary btn-add-song" href="" (click)="addSongForm($event)">Add Song</a>
+                    </div>
+                </div>
+
+                <div formArrayName="songs">
+
+                    <div *ngFor="let songform of songs.controls; let i=index">
+                        <div [formGroupName]="i" class="form-row">
+                            <label class="my-1 mr-2">{{ i + 1 }}.</label>
+                            <div class="col">
+                                <input class="form-control form-control-sm" type="text" placeholder="Name of the song" formControlName="name" />
+                            </div>
+                            <div class="col">
+                                <input type="file" class="form-control-file" formControlName="media_file" (change)="fileUpload($event)" placeholder="select media file">
+                            </div>
+                        </div>
+                        <!-- The repeated alias template -->
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg">Create Album</button>
+            </form>
+
+        </div>
+    </div>
+</div>
