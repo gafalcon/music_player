@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule }    from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
@@ -33,6 +34,7 @@ import { NewAlbumComponent } from './new-album/new-album.component';
       BrowserAnimationsModule,
       FormsModule,
       ReactiveFormsModule,
+      HttpClientModule,
       SimpleNotificationsModule.forRoot({
           position: ['bottom', 'right'],
           timeOut: 5000,

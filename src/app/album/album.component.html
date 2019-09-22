@@ -3,9 +3,9 @@
     <img class="col-sm" src="{{ playlist.cover_art_url }}">
     <div class="col-sm" >
         <h3>
-            {{ playlist.playlist_name }}
+            {{ playlist.name }}
         </h3>
-        <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue(playlist)">Add To Queue</button>
+        <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">Add To Queue</button>
     </div>
 </div>
 <div class="row song-list">

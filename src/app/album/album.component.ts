@@ -14,7 +14,7 @@ import { AmplitudeService } from '../amplitude.service';
 })
 export class AlbumComponent implements OnInit {
 
-    playlist: Playlist;
+    playlist = new Playlist("Playlist_name", "art", null);
     constructor(
         private route: ActivatedRoute,
         // private location: Location,
@@ -28,15 +28,13 @@ export class AlbumComponent implements OnInit {
 
     getAlbum() {
         const id = +this.route.snapshot.paramMap.get('id');
-        console.log(id);
         this.api.getPlaylist(id)
             .subscribe(playlist => {
                 this.playlist = playlist;
-                console.log(this.playlist);
             } );
     }
 
-    addPlaylistToQueue(playlist: Playlist) {
+    addPlaylistToQueue() {
         this.amplitude.addSongs(this.playlist.songs);
     }
 

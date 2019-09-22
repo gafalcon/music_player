@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Song } from './song';
 import { Playlist } from './playlist'
 import * as data from '../music/playlists.json'
@@ -9,6 +10,7 @@ import * as data from '../music/playlists.json'
 })
 export class ApiService {
 
+    private api_url = "http://localhost:8080/";
     songs: Array<Song> = [
         {
             name: 'Risin\' High (feat Raashan Ahmad)',
@@ -46,14 +48,24 @@ export class ApiService {
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg'
         }
     ];
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     getCurrentPlaylist(): Observable<Array<Song>> {
         return of(this.songs);
     }
 
-    getPlaylists(): Observable<Array<object>> {
+    getPlaylists2(): Observable<Array<object>> {
+        this.http.get<Array<object>>(this.api_url + 'playlists').subscribe(
+            playlists => {
+                console.log("Fetched from api server");
+                console.log(playlists);
+            }
+        );
         return of(data.playlists);
+    }
+
+    getPlaylists(): Observable<Array<object>> {
+        return this.http.get<Array<object>>(this.api_url + 'playlists');
     }
 
     getAlbums(userId: number): Observable<Array<object>> {
@@ -61,6 +73,16 @@ export class ApiService {
     }
 
     getPlaylist(id): Observable<Playlist> {
-        return of(data.full_playlists[id]);
+        return this.http.get<Playlist>(this.api_url + 'playlists/' + id);
+        // return of(data.full_playlists[id]);
     }
+
+    newSong(data) {
+        return this.http.post<any>(this.api_url + "songs", data);
+    }
+
+    uploadSong(data) {
+        return this.http.post(this.api_url + "songs/upload", data);
+    }
+
 }

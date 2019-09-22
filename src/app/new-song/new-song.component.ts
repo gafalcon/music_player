@@ -28,7 +28,7 @@ export class NewSongComponent implements OnInit {
             name: [''],
             genres: this.formBuilder.array([]),
             album: [''],
-            media_file: [''],
+            media_file: null,
             lyrics: ['']
         });
 
@@ -50,11 +50,22 @@ export class NewSongComponent implements OnInit {
     }
 
     onSubmit() {
-        console.warn(this.form.value);
+        console.log(this.form.value);
+        this.apiService.newSong(this.form.value).subscribe((res) => {
+            console.log(res);
+            const data = new FormData();
+            data.append('song_id', res.id);
+            data.append('media_file', this.form.get('media_file').value);
+            this.apiService.uploadSong(data).subscribe((res) => {
+                console.log('media file uploaded!');
+                console.log(res);
+            });
+        });
     }
 
     fileUpload(evt){
         console.log(evt.target.files);
+        this.form.get('media_file').setValue(evt.target.files[0]);
         this.mediaFile = evt.target.files[0];
     }
 
