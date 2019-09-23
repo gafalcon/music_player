@@ -4,15 +4,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Song } from './song';
 import { Playlist } from './playlist'
 import * as data from '../music/playlists.json'
+import { Album } from './Album';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-    private api_url = "http://localhost:8080/";
+    private api_url = 'http://localhost:8080/';
     songs: Array<Song> = [
         {
+            id: 1,
             name: 'Risin\' High (feat Raashan Ahmad)',
             artist: 'Ancient Astronauts',
             album: 'We Are to Answer',
@@ -20,6 +22,7 @@ export class ApiService {
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg'
         },
         {
+            id: 2,
             name: 'The Gun',
             artist: 'Lorn',
             album: 'Ask The Dust',
@@ -27,6 +30,7 @@ export class ApiService {
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/ask-the-dust.jpg'
         },
         {
+            id: 3,
             name: 'Anvil',
             artist: 'Lorn',
             album: 'Anvil',
@@ -34,6 +38,7 @@ export class ApiService {
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/anvil.jpg'
         },
         {
+            id: 4,
             name: 'I Came Running',
             artist: 'Ancient Astronauts',
             album: 'We Are to Answer',
@@ -41,6 +46,7 @@ export class ApiService {
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg'
         },
         {
+            id: 5,
             name: 'First Snow',
             artist: 'Emancipator',
             album: 'Soon It Will Be Cold Enough',
@@ -57,7 +63,7 @@ export class ApiService {
     getPlaylists2(): Observable<Array<object>> {
         this.http.get<Array<object>>(this.api_url + 'playlists').subscribe(
             playlists => {
-                console.log("Fetched from api server");
+                console.log('Fetched from api server');
                 console.log(playlists);
             }
         );
@@ -78,11 +84,19 @@ export class ApiService {
     }
 
     newSong(data) {
-        return this.http.post<any>(this.api_url + "songs", data);
+        return this.http.post<any>(this.api_url + 'songs', data);
     }
 
     uploadSong(data) {
-        return this.http.post(this.api_url + "songs/upload", data);
+        return this.http.post(this.api_url + 'songs/upload', data);
+    }
+
+    newAlbum(album: Album) {
+        return this.http.post<Album>(this.api_url + 'albums', album);
+    }
+
+    uploadAlbumCover(data) {
+        return this.http.post(this.api_url + 'albums/cover', data);
     }
 
 }

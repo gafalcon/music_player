@@ -63,7 +63,7 @@ export class NewSongComponent implements OnInit {
         });
     }
 
-    fileUpload(evt){
+    fileUpload(evt) {
         console.log(evt.target.files);
         this.form.get('media_file').setValue(evt.target.files[0]);
         this.mediaFile = evt.target.files[0];
