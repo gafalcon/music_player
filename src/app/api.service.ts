@@ -74,8 +74,8 @@ export class ApiService {
         return this.http.get<Array<object>>(this.api_url + 'playlists');
     }
 
-    getAlbums(userId: number): Observable<Array<object>> {
-        return of(data.albums);
+    getAlbums(userId: number): Observable<Array<Album>> {
+        return this.http.get<Array<Album>>(this.api_url + 'albums');
     }
 
     getPlaylist(id): Observable<Playlist> {
@@ -89,6 +89,10 @@ export class ApiService {
 
     uploadSong(data) {
         return this.http.post(this.api_url + 'songs/upload', data);
+    }
+
+    getAlbum(id: number): Observable<Album> {
+        return this.http.get<Album>(this.api_url + 'albums/' + String(id));
     }
 
     newAlbum(album: Album) {

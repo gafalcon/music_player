@@ -10,3 +10,15 @@
         </a>
     </div>
 </div>
+
+<h1>Albums</h1>
+<div class="right">
+    <div class="song-to-add" *ngFor="let album of albums">
+        <a href="" routerLink="/album/{{ album.id }}">
+            <img src="{{ album.coverArt }}"/>
+        </a>
+        <a class="add-to-playlist-button" (click)="addAlbumToQueue(album.id)">
+            Add To Playlist
+        </a>
+    </div>
+</div>
