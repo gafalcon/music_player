@@ -11,7 +11,7 @@ import { Album } from './Album';
 })
 export class ApiService {
 
-    private api_url = 'http://localhost:8080/';
+    private api_url = 'http://localhost:8080/api/';
     songs: Array<Song> = [
         {
             id: 1,
@@ -60,17 +60,8 @@ export class ApiService {
         return of(this.songs);
     }
 
-    getPlaylists2(): Observable<Array<object>> {
-        this.http.get<Array<object>>(this.api_url + 'playlists').subscribe(
-            playlists => {
-                console.log('Fetched from api server');
-                console.log(playlists);
-            }
-        );
-        return of(data.playlists);
-    }
-
     getPlaylists(): Observable<Array<object>> {
+        console.log(this.api_url + 'playlists');
         return this.http.get<Array<object>>(this.api_url + 'playlists');
     }
 
