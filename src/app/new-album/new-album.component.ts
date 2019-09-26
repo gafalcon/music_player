@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray} from '@angular/forms';
 import { ApiService } from '../api.service';
 import { mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';  // RxJS 6 syntax
+import { NotificationsService } from 'angular2-notifications';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-album',
@@ -13,7 +16,12 @@ export class NewAlbumComponent implements OnInit {
     form: FormGroup;
     coverArtUrl: any = 'http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png';
     public imageFile: File;
-    constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
+    constructor(
+        private formBuilder: FormBuilder,
+        private apiService: ApiService,
+        private notifier: NotificationsService,
+        private router: Router
+    ) {
 
         this.form = this.formBuilder.group({
             name: [''],
@@ -50,22 +58,25 @@ export class NewAlbumComponent implements OnInit {
                 data.append('album_id', String(album.id));
                 data.append('cover_file', this.imageFile);
 
+                const requests = [];
                 album.songs.forEach((song, idx) => {
                     console.log((this.form.controls.songs as FormArray).controls[idx].get('media_file').value);
                     const songdata = new FormData();
                     songdata.append('song_id', String(song.id));
                     songdata.append('media_file', (this.form.controls.songs as FormArray).controls[idx].get('media_file').value);
-                    this.apiService.uploadSong(songdata).subscribe((res) => {
-                        console.log('media file uploaded!');
-                        console.log(res);
-                    });
+                    requests.push(this.apiService.uploadSong(songdata));
 
                 });
 
-                return this.apiService.uploadAlbumCover(data);
+                requests.push(this.apiService.uploadAlbumCover(data));
+                return forkJoin(requests);
 
             })
-        ).subscribe((res) => console.log(res));
+        ).subscribe((res) => {
+            console.log(res);
+            this.notifier.success('Album uploaded!');
+            this.router.navigate(['/']);
+        });
     }
 
     imageSelected(files: FileList) {
@@ -74,7 +85,7 @@ export class NewAlbumComponent implements OnInit {
 
         const mimeType = files[0].type;
         if (mimeType.match(/image\/*/) == null) {
-            // this.message = "Only images are supported.";
+            // this.message = 'Only images are supported.';
             return;
         }
 
