@@ -6,8 +6,12 @@
                 <span class="playlist-artist-album">{{ song.album }}</span>
             </div>
             <div class="song-buttons">
-                <button id="play-pause" class="btn btn-light btn-circle" (click)="playSong(song)">></button>
-                <button type="button" class="btn btn-light add-button btn-circle" (click)="addSongToQueue(song)" >+</button>
+                <button id="play-pause" class="btn btn-light btn-circle" (click)="playSong(song)">
+                    <span class="oi oi-media-play" title="media play" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-light add-button btn-circle" (click)="addSongToQueue(song)" >
+                    <span class="oi oi-plus" title="plus" aria-hidden="true"></span>
+                </button>
                 <div class="dropdown more-button song-button">
                     <button class="btn btn-light btn-circle dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
