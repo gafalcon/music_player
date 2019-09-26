@@ -1,25 +1,12 @@
 <div class="container">
 <div class="playlist-description row">
-    <img class="col-sm" src="{{ playlist.cover_art_url }}">
+    <img class="col-sm" src="{{ album.coverArt }}">
     <div class="col-sm" >
         <h3>
-            {{ playlist.name }}
+            {{ album.name }}
         </h3>
         <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">Add To Queue</button>
     </div>
 </div>
-<div class="row song-list">
-    <ul class="list-group col-sm">
-        <li class="list-group-item playlist-song" *ngFor="let song of playlist.songs; index as i;">
-            <div class="playlist-song-meta">
-                <span class="playlist-song-name">{{ song.name }}</span>
-                <span class="playlist-artist-album">{{ song.album }}</span>
-            </div>
-            <div class="song-buttons">
-                <button type="button" class="btn btn-primary add-button" (click)="addSongToQueue(song)" >+</button>
-                <div id="play-pause" (click)="playSong(song)"></div>
-            </div>
-        </li>
-    </ul>
-</div>
+<app-song-list [songs]="album.songs"></app-song-list>
 </div>

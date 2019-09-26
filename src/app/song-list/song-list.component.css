@@ -1,0 +1,54 @@
+
+li.playlist-song:hover {
+    background-color: #f1f2f3;
+}
+.playlist-song div.playlist-song-meta {
+    float: left;
+    margin-left: 15px;
+    /* width: calc( 100% - 80px ); */
+}
+.playlist-song-meta span.playlist-song-name {
+    color: #414344;
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+.playlist-song-meta span.playlist-artist-album {
+    color: #AAAFB3;
+    font-size: 12px;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+
+.song-button {
+    display: inline;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+    margin: auto 2px;
+}
+.song-list {
+    margin-top: 10px;
+}
+
+.song-buttons {
+    float: right;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+    margin: auto 2px;
+}

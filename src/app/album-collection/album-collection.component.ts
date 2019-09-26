@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AmplitudeService } from '../amplitude.service';
 import { ApiService } from '../api.service';
-import { Playlist } from '../playlist';
 import { Album } from '../Album';
 
 @Component({

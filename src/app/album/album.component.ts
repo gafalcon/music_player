@@ -1,11 +1,10 @@
 
 import { Component, OnInit, Input } from '@angular/core';
-import { Playlist } from '../playlist';
 import { ActivatedRoute } from '@angular/router';
 // import { Location } from '@angular/common';
 import { ApiService } from '../api.service';
-import { Song } from '../song';
 import { AmplitudeService } from '../amplitude.service';
+import { Album } from '../Album';
 
 @Component({
   selector: 'app-album',
@@ -14,7 +13,7 @@ import { AmplitudeService } from '../amplitude.service';
 })
 export class AlbumComponent implements OnInit {
 
-    playlist = new Playlist("Playlist_name", "art", null);
+    album = new Album(1, '', '', '', '', []);
     constructor(
         private route: ActivatedRoute,
         // private location: Location,
@@ -28,22 +27,14 @@ export class AlbumComponent implements OnInit {
 
     getAlbum() {
         const id = +this.route.snapshot.paramMap.get('id');
-        this.api.getPlaylist(id)
-            .subscribe(playlist => {
-                this.playlist = playlist;
+        this.api.getAlbum(id)
+            .subscribe(album => {
+                this.album = album;
             } );
     }
 
     addPlaylistToQueue() {
-        this.amplitude.addSongs(this.playlist.songs);
-    }
-
-    addSongToQueue(song: Song) {
-        this.amplitude.addSong(song);
-    }
-
-    playSong(song: Song) {
-        this.amplitude.playNow(song);
+        this.amplitude.addSongs(this.album.songs);
     }
 
 }

@@ -1,1 +1,12 @@
-<p>playlist works!</p>
+<div class="container">
+    <div class="playlist-description row">
+        <img class="col-sm" src="{{ playlist.cover_art_url }}">
+        <div class="col-sm" >
+            <h3>
+                {{ playlist.name }}
+            </h3>
+            <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">Add To Queue</button>
+        </div>
+    </div>
+    <app-song-list [songs]="playlist.songs"></app-song-list>
+</div>

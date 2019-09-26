@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Song } from './song';
-import { Playlist } from './playlist'
-import * as data from '../music/playlists.json'
+import { Playlist } from './playlist';
 import { Album } from './Album';
 
 @Injectable({
@@ -11,7 +10,7 @@ import { Album } from './Album';
 })
 export class ApiService {
 
-    private api_url = 'http://localhost:8080/api/';
+    private apiURL = 'http://localhost:8080/api/';
     songs: Array<Song> = [
         {
             id: 1,
@@ -61,37 +60,36 @@ export class ApiService {
     }
 
     getPlaylists(): Observable<Array<object>> {
-        console.log(this.api_url + 'playlists');
-        return this.http.get<Array<object>>(this.api_url + 'playlists');
+        return this.http.get<Array<object>>(this.apiURL + 'playlists');
     }
 
     getAlbums(userId: number): Observable<Array<Album>> {
-        return this.http.get<Array<Album>>(this.api_url + 'albums');
+        return this.http.get<Array<Album>>(this.apiURL + 'albums');
     }
 
     getPlaylist(id): Observable<Playlist> {
-        return this.http.get<Playlist>(this.api_url + 'playlists/' + id);
+        return this.http.get<Playlist>(this.apiURL + 'playlists/' + id);
         // return of(data.full_playlists[id]);
     }
 
     newSong(data) {
-        return this.http.post<any>(this.api_url + 'songs', data);
+        return this.http.post<any>(this.apiURL + 'songs', data);
     }
 
     uploadSong(data) {
-        return this.http.post(this.api_url + 'songs/upload', data);
+        return this.http.post(this.apiURL + 'songs/upload', data);
     }
 
     getAlbum(id: number): Observable<Album> {
-        return this.http.get<Album>(this.api_url + 'albums/' + String(id));
+        return this.http.get<Album>(this.apiURL + 'albums/' + String(id));
     }
 
     newAlbum(album: Album) {
-        return this.http.post<Album>(this.api_url + 'albums', album);
+        return this.http.post<Album>(this.apiURL + 'albums', album);
     }
 
-    uploadAlbumCover(data) {
-        return this.http.post(this.api_url + 'albums/cover', data);
+    uploadAlbumCover(data: any) {
+        return this.http.post(this.apiURL + 'albums/cover', data);
     }
 
 }

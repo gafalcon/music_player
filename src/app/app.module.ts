@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NewSongComponent } from './new-song/new-song.component';
 import { NewAlbumComponent } from './new-album/new-album.component';
+import { SongListComponent } from './song-list/song-list.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NewAlbumComponent } from './new-album/new-album.component';
     AlbumCollectionComponent,
     NavbarComponent,
     NewSongComponent,
-    NewAlbumComponent
+    NewAlbumComponent,
+    SongListComponent
   ],
   imports: [
       BrowserModule,

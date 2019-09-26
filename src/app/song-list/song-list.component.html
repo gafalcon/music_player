@@ -1,0 +1,25 @@
+<div class="row song-list">
+    <ul class="list-group col-sm">
+        <li class="list-group-item playlist-song" *ngFor="let song of songs; index as i;">
+            <div class="playlist-song-meta">
+                <span class="playlist-song-name">{{ song.name }}</span>
+                <span class="playlist-artist-album">{{ song.album }}</span>
+            </div>
+            <div class="song-buttons">
+                <button id="play-pause" class="btn btn-light btn-circle" (click)="playSong(song)">></button>
+                <button type="button" class="btn btn-light add-button btn-circle" (click)="addSongToQueue(song)" >+</button>
+                <div class="dropdown more-button song-button">
+                    <button class="btn btn-light btn-circle dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Add to playlist</a>
+                        <a class="dropdown-item" href="#">Add to Queue</a>
+                        <a class="dropdown-item" href="#">View Author</a>
+                        <a class="dropdown-item" href="#">View Song</a>
+                        <a class="dropdown-item" href="#">Add to Favorites</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
