@@ -1,24 +1,27 @@
 
-<h1>Playlists</h1>
-<div class="right">
-    <div class="song-to-add" *ngFor="let playlist of playlists">
-        <a href="" routerLink="/playlist/{{ playlist.id }}">
-            <img src="{{ playlist.cover_art_url }}"/>
-        </a>
-        <a class="add-to-playlist-button" (click)="addPlaylistToQueue(playlist.id)">
-            Add To Playlist
-        </a>
+<div id="playlists" *ngIf="playlists?.length">
+    <h1>Playlists</h1>
+    <div class="right">
+        <div class="song-to-add" *ngFor="let playlist of playlists">
+            <a href="" routerLink="/playlist/{{ playlist.id }}">
+                <img src="{{ playlist.cover_art_url }}"/>
+            </a>
+            <a class="add-to-playlist-button" (click)="addPlaylistToQueue(playlist.id)">
+                Add To Playlist
+            </a>
+        </div>
     </div>
 </div>
-
-<h1>Albums</h1>
-<div class="right">
-    <div class="song-to-add" *ngFor="let album of albums">
-        <a href="" routerLink="/album/{{ album.id }}">
-            <img src="{{ album.coverArt }}"/>
-        </a>
-        <a class="add-to-playlist-button" (click)="addAlbumToQueue(album.id)">
-            Add To Playlist
-        </a>
+<div id="albums" *ngIf="albums?.length ">
+    <h1>Albums</h1>
+    <div class="right">
+        <div class="song-to-add" *ngFor="let album of albums">
+            <a href="" routerLink="/album/{{ album.id }}">
+                <img src="{{ album.coverArt }}"/>
+            </a>
+            <a class="add-to-playlist-button" (click)="addAlbumToQueue(album.id)">
+                Add To Playlist
+            </a>
+        </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'mplayer';
+    title = 'mplayer';
+    route: string;
+    constructor(public router: Router) {
+        this.route = router.url;
+
+    }
+
+    isAuthRoute() {
+        return this.router.url === '/login' || this.router.url === '/signup';
+    }
+
 }

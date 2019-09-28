@@ -19,7 +19,9 @@ export class AlbumCollectionComponent implements OnInit {
             playlists => this.playlists = playlists
         );
         this.apiService.getAlbums(0).subscribe(
-            albums => this.albums = albums
+            albums => {
+                this.albums = albums;
+            }
         );
     }
 
