@@ -16,6 +16,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NewSongComponent } from './new-song/new-song.component';
 import { NewAlbumComponent } from './new-album/new-album.component';
 import { SongListComponent } from './song-list/song-list.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { SongListComponent } from './song-list/song-list.component';
     NavbarComponent,
     NewSongComponent,
     NewAlbumComponent,
-    SongListComponent
+    SongListComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
       BrowserModule,
