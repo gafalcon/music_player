@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AmplitudeService } from '../amplitude.service';
 import { ApiService } from '../api.service';
-import { Album } from '../Album';
+import { Album } from '../models/album';
 
 @Component({
   selector: 'app-album-collection',

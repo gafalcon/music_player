@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Playlist } from '../playlist';
+import { Playlist } from '../models/playlist';
 import { ActivatedRoute } from '@angular/router';
 // import { Location } from '@angular/common';
 import { ApiService } from '../api.service';

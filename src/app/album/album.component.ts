@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 // import { Location } from '@angular/common';
 import { ApiService } from '../api.service';
 import { AmplitudeService } from '../amplitude.service';
-import { Album } from '../Album';
+import { Album } from '../models/album';
 
 @Component({
   selector: 'app-album',

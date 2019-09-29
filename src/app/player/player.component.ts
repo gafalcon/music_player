@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AmplitudeService } from '../amplitude.service';
-import { Song } from '../song';
+import { Song } from '../models/song';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
