@@ -92,6 +92,7 @@ export class SignupComponent implements OnInit {
         const user = new User(null, vals.username, vals.firstName, vals.lastName, vals.gender, vals.password, vals.email  );
         this.authService.signup(user).subscribe((user)=>{
             console.log(user);
+            this.notifier.success('User created!');
             this.router.navigate(['/']);
         })
     }

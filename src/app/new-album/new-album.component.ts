@@ -67,11 +67,8 @@ export class NewAlbumComponent implements OnInit {
         this.apiService.newAlbum(this.form.value).pipe(
             mergeMap((album) => {
                 console.log(album);
-                const data = new FormData();
-                data.append('album_id', String(album.id));
-                data.append('cover_file', this.imageFile);
-
                 const requests = [];
+
                 album.songs.forEach((song, idx) => {
                     console.log((this.form.controls.songs as FormArray).controls[idx].get('media_file').value);
                     const songdata = new FormData();
@@ -81,7 +78,12 @@ export class NewAlbumComponent implements OnInit {
 
                 });
 
-                requests.push(this.apiService.uploadAlbumCover(data));
+                if (this.imageFile) {
+                    const data = new FormData();
+                    data.append('album_id', String(album.id));
+                    data.append('cover_file', this.imageFile);
+                    requests.push(this.apiService.uploadAlbumCover(data));
+                }
                 return forkJoin(requests);
 
             })
