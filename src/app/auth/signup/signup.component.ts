@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-signup',
@@ -28,16 +29,16 @@ export class SignupComponent implements OnInit {
 	                  ,"Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","United States Minor Outlying Islands","Uruguay"
 	                  ,"Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 
-    constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+    constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private notifier: NotificationsService) {
         this.form = this.formBuilder.group({
-            firstName: [''],
-            lastName: [''],
-            gender: [''],
-            email: [''],
-            username: [''],
-            password: [''],
-            confirmPassword: [''],
-            country: ['']
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            gender: ['', Validators.email],
+            email: ['', Validators.required],
+            username: ['', Validators.required],
+            password: ['', Validators.required],
+            confirmPassword: ['', Validators.required],
+            country: ['', Validators.required]
         });
     }
 
@@ -45,6 +46,10 @@ export class SignupComponent implements OnInit {
     }
 
     onSubmit() {
+        if (this.form.status !== 'VALID') {
+            this.notifier.error('There are errors in your form');
+            return;
+        }
         console.log(this.form.value);
         const vals = { ...this.form.value }
         const user = new User(null, vals.username, vals.firstName, vals.lastName, vals.gender, vals.password, vals.email  );

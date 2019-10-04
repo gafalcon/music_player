@@ -1,4 +1,9 @@
-
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 .left-nav {
     margin-left: 5px;
+}
+
+.navbar-brand {
+    font-family: 'Pacifico', cursive;
+    font-size: 20px;
 }

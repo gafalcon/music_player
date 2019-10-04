@@ -3,4 +3,8 @@
 }
 .playlist-description img {
     max-width: 450px;
+    border-radius: 30px;
+}
+h3 {
+    color: white;
 }

@@ -2,27 +2,37 @@
     <div class="row">
         <div class="col">
             <h1>New Album</h1>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" [class.was-validated]="wasValidated">
                 <div class="row">
                     <div class="col-4">
                         <img class="" [src]=" coverArtUrl">
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Cover Art Image</label>
-                            <input #file type="file" accept="image/*" class="form-control-file" id="exampleFormControlFile1" formControlName="cover_art_img" (change)="imageSelected(file.files)">
+                        <div class="custom-file">
+                            <input #file type="file" accept="image/*" formControlName="cover_art_img"  class="custom-file-input" id="customFile" (change)="imageSelected(file.files)">
+                            <label class="custom-file-label" [class.invalid-file]="invalidImage" for="customFile">Cover Art Image</label>
+                            <div class="invalid-file-feedback">{{ imgFileError }}</div>
                         </div>
                     </div>
                     <div class="col-8">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Name</label>
-                            <input type="tex" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="name">
+                            <input type="tex" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="name" required>
+                            <div class="invalid-feedback">
+                                Please enter a name for the album.
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Artist</label>
-                            <input type="tex" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="author">
+                            <label for="exampleFormControlInput1">Author</label>
+                            <input type="tex" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="author" required>
+                            <div class="invalid-feedback">
+                                Please enter the author of the album.
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Release Date</label>
-                            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="release_date">
+                            <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="" formControlName="release_date" required>
+                            <div class="invalid-feedback">
+                                Please select a release date.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,16 +53,28 @@
                         <div [formGroupName]="i" class="form-row">
                             <label class="my-1 mr-2">{{ i + 1 }}.</label>
                             <div class="col">
-                                <input class="form-control form-control-sm" type="text" placeholder="Name of the song" formControlName="name" />
+                                <input class="form-control form-control-sm" type="text" placeholder="Name of the song" formControlName="name" required/>
                             </div>
                             <div class="col">
-                                <input #file type="file" class="form-control-file" (change)="songFileSelected(file.files, i)">
+                                <div class="custom-file form-control-sm">
+                                    <input #file type="file" accept="audio/*" class="custom-file-input form-control-file" (change)="songFileSelected(file.files, i, $event)" required>
+                                    <label class="custom-file-label form-control-sm" [class.invalid-file]="invalidImage" for="customFile">Audio File</label>
+                                    <div class="invalid-file-feedback">{{ audioFileError[i] }}</div>
+                                </div>
+                                <!-- <input #file type="file" accept="audio/*" class="form-control-file" (change)="songFileSelected(file.files, i)" required> -->
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-small btn-danger btn-delete" type="button" (click)="deleteSongForm(i)">
+                                    <span class="oi oi-delete" title="plus" aria-hidden="true"></span>
+                                </button>
                             </div>
                         </div>
 
                     </div>
                 </div>
-
+                <p>
+                   Form Status: {{ form.status }}
+                </p>
                 <button class="btn btn-primary btn-lg">Create Album</button>
             </form>
 

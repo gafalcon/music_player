@@ -42,7 +42,7 @@ import { SignupComponent } from './auth/signup/signup.component';
       ReactiveFormsModule,
       HttpClientModule,
       SimpleNotificationsModule.forRoot({
-          position: ['bottom', 'right'],
+          position: ['top', 'right'],
           timeOut: 5000,
           showProgressBar: true,
           maxStack: 3
