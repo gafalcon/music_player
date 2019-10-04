@@ -14,52 +14,84 @@
 	                      <div class="form-row">
 		                        <div class="col form-group">
 			                          <label>First name </label>
-		  	                        <input type="text" class="form-control" placeholder="" formControlName="firstName">
+	  	                        <input type="text" class="form-control" [class]="getFieldClass(firstName)" placeholder="" formControlName="firstName">
+                              <div class="invalid-input" *ngIf="invalidField(firstName)">
+                                  You need to enter your first name.
+                              </div>
 		                        </div> <!-- form-group end.// -->
 		                        <div class="col form-group">
 			                          <label>Last name</label>
-		  	                        <input type="text" class="form-control" placeholder=" " formControlName="lastName">
+		  	                        <input type="text" class="form-control" [class]="getFieldClass(lastName)" placeholder=" " formControlName="lastName">
+                                <div class="invalid-input" *ngIf="invalidField(lastName)">
+                                    You need to enter your last name.
+                                </div>
 		                        </div> <!-- form-group end.// -->
 	                      </div> <!-- form-row end.// -->
 	                      <div class="form-group">
 		                        <label>Email address</label>
-		                        <input type="email" class="form-control" placeholder="" formControlName="email">
+		                        <input type="email" class="form-control" [class]="getFieldClass(email)" placeholder="" formControlName="email">
 		                        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+                            <div class="invalid-input" *ngIf="invalidField(email)">
+                                You need to enter a valid email.
+                            </div>
 	                      </div> <!-- form-group end.// -->
 	                      <div class="form-group">
+                            <label>Gender</label>
+                            <br />
 			                      <label class="form-check form-check-inline">
-		                            <input class="form-check-input" type="radio" name="gender" value="male" formControlName="gender">
+		                            <input class="form-check-input" [class]="getFieldClass(gender, 'form-check-input')" type="radio" name="gender" value="male" formControlName="gender">
 		                            <span class="form-check-label"> Male </span>
 		                        </label>
 		                        <label class="form-check form-check-inline">
-		                            <input class="form-check-input" type="radio" name="gender" value="female" formControlName="gender">
+		                            <input class="form-check-input" [class]="getFieldClass(gender, 'form-check-input')" type="radio" name="gender" value="female" formControlName="gender">
 		                            <span class="form-check-label"> Female</span>
 		                        </label>
+
+                            <div class="invalid-input" *ngIf="invalidField(gender)">
+                                Please select your gender.
+                            </div>
 	                      </div> <!-- form-group end.// -->
 	                      <div class="form-group">
 		                        <label>Country</label>
-		                        <select id="inputState" class="form-control" formControlName="country">
+		                        <select id="inputState" class="form-control" [class]="getFieldClass(country)" formControlName="country">
                                 <option *ngFor="let country of country_list" value="{{ country }}">{{ country }}</option>
 		                            <option selected="">United States</option>
 		                        </select>
+                            <div class="invalid-input" *ngIf="invalidField(country)">
+                                Please select your country.
+                            </div>
 		                    </div> <!-- form-group end.// -->
 		                    <div class="form-group">
 		                        <label>Username</label>
-	                          <input type="text" class="form-control" placeholder="" formControlName="username">
+	                          <input type="text" class="form-control" [class]="getFieldClass(username)" placeholder="" formControlName="username">
+                            <div class="invalid-input" *ngIf="invalidField(username)">
+                                You need to select an username.
+                            </div>
 	                      </div> <!-- form-group end.// -->
 		                    <div class="form-group">
 		                        <label>Create password</label>
-	                          <input class="form-control" type="password" formControlName="password">
+	                          <input class="form-control" [class]="getFieldClass(password)" type="password" formControlName="password">
+
+                            <div class="invalid-input" *ngIf="invalidField(password)">
+                                You need to enter a password.
+                            </div>
 	                      </div> <!-- form-group end.// -->
 		                    <div class="form-group">
 		                        <label>Confirm password</label>
-	                          <input class="form-control" type="password" formControlName="confirmPassword">
+	                          <input class="form-control" [class]="getConfirmPassClass()" type="password" formControlName="confirmPassword">
+                            <div class="invalid-input" *ngIf="invalidField(confirmPassword)">
+                                You need to confirm your password.
+                            </div>
+                            <div class="invalid-input" *ngIf="form.errors && form.errors.passwordMismatch">
+                                The passwords must match.
+                            </div>
 	                      </div> <!-- form-group end.// -->
 	                      <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block"> Register  </button>
-                            <p>
-                                Form Status: {{ form.status }}
-                            </p>
+                            <!-- <p> -->
+                            <!-- Form Status: {{ form.status }} <br /> -->
+                            <!-- </p> -->
                         </div> <!-- form-group// -->
                     </form>
                 </article> <!-- card-body end .// -->

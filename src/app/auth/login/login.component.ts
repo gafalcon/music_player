@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
     }
 
-    usernameValid(){
+    usernameValid() {
         return this.username.invalid && (this.username.dirty || this.username.touched) || this.loginInvalid;
     }
 
