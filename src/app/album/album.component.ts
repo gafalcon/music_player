@@ -2,8 +2,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 // import { Location } from '@angular/common';
-import { ApiService } from '../api.service';
-import { AmplitudeService } from '../amplitude.service';
+import { ApiService } from '../services/api.service';
+import { AmplitudeService } from '../services/amplitude.service';
 import { Album } from '../models/album';
 
 @Component({

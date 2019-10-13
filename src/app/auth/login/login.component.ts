@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -16,10 +16,18 @@ export class LoginComponent implements OnInit {
     public loginInvalid = false;
     public usernameError = 'Please enter your username';
     public passwordError = 'Please enter your password';
+    returnUrl: string;
+
     constructor(private formBuilder: FormBuilder,
                 private authService: AuthService,
                 private notifier: NotificationsService,
+                private route: ActivatedRoute,
                 private router: Router) {
+
+        if (this.authService.currentUserValue) {
+            notifier.warn('Already logged In!');
+            this.router.navigate(['/']);
+        }
         this.form = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -28,6 +36,7 @@ export class LoginComponent implements OnInit {
     get password() { return this.form.get('password'); }
     get username() { return this.form.get('username'); }
     ngOnInit() {
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     usernameValid() {
@@ -45,10 +54,10 @@ export class LoginComponent implements OnInit {
             this.notifier.error('There are errors in your form');
             return;
         }
-        this.authService.login(this.form.value).subscribe(
+        this.authService.login(this.username.value, this.password.value).subscribe(
             (user) => {
                 console.log(user);
-                this.router.navigate(['/']);
+                this.router.navigate([this.returnUrl]);
             },
             (error) => {
                 this.loginInvalid = true;

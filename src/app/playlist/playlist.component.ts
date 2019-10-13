@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Playlist } from '../models/playlist';
 import { ActivatedRoute } from '@angular/router';
 // import { Location } from '@angular/common';
-import { ApiService } from '../api.service';
-import { AmplitudeService } from '../amplitude.service';
+import { ApiService } from '../services/api.service';
+import { AmplitudeService } from '../services/amplitude.service';
 
 @Component({
   selector: 'app-playlist',

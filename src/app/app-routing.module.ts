@@ -7,17 +7,18 @@ import { NewAlbumComponent } from './new-album/new-album.component';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './helpers/auth.guard';
 
 
 
 const routes: Routes = [
     { path: '', component: AlbumCollectionComponent },
-    { path: 'album/create', component: NewAlbumComponent},
+    { path: 'album/create', component: NewAlbumComponent, canActivate: [AuthGuard]},
     { path: 'album/:id', component: AlbumComponent },
     { path: 'playlist/:id', component: PlaylistComponent },
-    { path: 'new_song', component: NewSongComponent},
+    { path: 'new_song', component: NewSongComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent}
+    { path: 'signup', component: SignupComponent }
 ];
 
 @NgModule({

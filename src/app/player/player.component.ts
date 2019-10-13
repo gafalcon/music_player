@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AmplitudeService } from '../amplitude.service';
+import { AmplitudeService } from '../services/amplitude.service';
 import { Song } from '../models/song';
 @Component({
   selector: 'app-player',

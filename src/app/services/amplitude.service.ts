@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as Amplitude from 'amplitudejs';
 import { ApiService } from './api.service';
-import { Song } from './models/song';
+import { Song } from '../models/song';
 import { NotificationsService } from 'angular2-notifications';
 
 @Injectable({

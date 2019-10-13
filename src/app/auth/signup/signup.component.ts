@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
@@ -88,12 +88,20 @@ export class SignupComponent implements OnInit {
             return;
         }
         console.log(this.form.value);
-        const vals = { ...this.form.value }
-        const user = new User(null, vals.username, vals.firstName, vals.lastName, vals.gender, vals.password, vals.email  );
-        this.authService.signup(user).subscribe((user)=>{
-            console.log(user);
+        const vals = { ...this.form.value };
+
+        const user = new User(null,
+                              vals.username,
+                              vals.firstName,
+                              vals.lastName,
+                              vals.gender,
+                              vals.password,
+                              vals.email, null);
+
+        this.authService.signup(user).subscribe((newUser) => {
+            console.log(newUser);
             this.notifier.success('User created!');
             this.router.navigate(['/']);
-        })
+        });
     }
 }

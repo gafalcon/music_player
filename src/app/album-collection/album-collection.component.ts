@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AmplitudeService } from '../amplitude.service';
-import { ApiService } from '../api.service';
+import { AmplitudeService } from '../services/amplitude.service';
+import { ApiService } from '../services/api.service';
 import { Album } from '../models/album';
 
 @Component({

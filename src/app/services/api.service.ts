@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Song } from './models/song';
-import { Playlist } from './models/playlist';
-import { Album } from './models/album';
+import { Song } from '../models/song';
+import { Playlist } from '../models/playlist';
+import { Album } from '../models/album';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-    private apiURL = 'http://localhost:8080/api/';
+    private apiURL = `${environment.apiUrl}/api/`;
     songs: Array<Song> = [
         {
             id: 1,

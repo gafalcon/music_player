@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators} from '@angular/forms';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 import { mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';  // RxJS 6 syntax
 import { NotificationsService } from 'angular2-notifications';
