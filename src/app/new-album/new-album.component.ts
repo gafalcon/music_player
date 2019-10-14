@@ -29,7 +29,7 @@ export class NewAlbumComponent implements OnInit {
 
         this.form = this.formBuilder.group({
             name: ['', Validators.required],
-            author: ['', Validators.required],
+            artist: ['', Validators.required],
             release_date: ['', Validators.required],
             songs: this.formBuilder.array([]),
             cover_art_img: ['']
