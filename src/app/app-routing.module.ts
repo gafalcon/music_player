@@ -8,6 +8,8 @@ import { PlaylistComponent } from './playlist/playlist.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './helpers/auth.guard';
+import { ProfileComponent } from './user/profile/profile.component';
+import { UsersComponent } from './user/users/users.component';
 
 
 
@@ -18,7 +20,9 @@ const routes: Routes = [
     { path: 'playlist/:id', component: PlaylistComponent },
     { path: 'new_song', component: NewSongComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent }
+    { path: 'signup', component: SignupComponent },
+    { path: 'users/:id', component: ProfileComponent },
+    { path: 'admin/users', component: UsersComponent },
 ];
 
 @NgModule({

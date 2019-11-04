@@ -20,6 +20,11 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { ProfileComponent } from './user/profile/profile.component';
+import { UsersComponent } from './user/users/users.component';
+import { CommentsComponent } from './comments/comments.component';
+import { LikesComponent } from './likes/likes.component';
 
 
 @NgModule({
@@ -34,7 +39,11 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     NewAlbumComponent,
     SongListComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent,
+    UsersComponent,
+    CommentsComponent,
+    LikesComponent
   ],
   imports: [
       BrowserModule,
@@ -48,7 +57,8 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
           timeOut: 5000,
           showProgressBar: true,
           maxStack: 3
-      })
+      }),
+      OAuthModule.forRoot()
   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
                 private authService: AuthService,
+                private oauthService: OAuthService,
                 private notifier: NotificationsService,
                 private route: ActivatedRoute,
                 private router: Router) {
@@ -65,6 +67,10 @@ export class LoginComponent implements OnInit {
                 this.notifier.error(error);
             }
         );
+    }
+
+    oauthLogin() {
+        this.oauthService.initImplicitFlow();
     }
 
 }

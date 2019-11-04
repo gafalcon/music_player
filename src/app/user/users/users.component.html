@@ -1,0 +1,62 @@
+<div class="users">
+    <div class="row">
+        <div class="col">
+            <h2>Users</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form>
+                <div class="form-row">
+                    <input type="text" class="col-12 col-md-8 col-lg-8 form-control mb-2 mr-sm-2" id="inlineFormInputGroupUsername2" placeholder="Enter a user to search">
+                    <button type="submit" class="col-12 col-md-2 col-lg-2 btn btn-primary mb-2" (click)="onSubmit()">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col">
+            <div class="btn btn-primary">Add New User</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; index as i;">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td><a routerLink="/users/{{user.username}}">{{ user.username }}</a></td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.rol }}</td>
+                        <td>
+                            <button class="btn btn-small btn-primary" type="button" (click)="editUser(i)">
+                                <span class="oi oi-pencil" title="plus" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-small btn-primary btn-delete" type="button">
+                                <span class="oi oi-envelope-closed" title="plus" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-small btn-danger btn-delete" type="button">
+                                <span class="oi oi-ban" title="plus" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-small btn-danger btn-delete" type="button" (click)="deleteUser(i)">
+                                <span class="oi oi-delete" title="plus" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

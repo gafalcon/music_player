@@ -4,6 +4,7 @@ import { of, throwError, BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private oauthService: OAuthService) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -25,6 +26,7 @@ export class AuthService {
 
     private storeCredentials(res) {
         if (res.user && res.accessToken) {
+            console.log("Storing credentials!!!");
             localStorage.setItem('currentUser', JSON.stringify(res.user));
             localStorage.setItem('jwtToken', res.accessToken);
             this.currentUserSubject.next(res.user);
@@ -41,9 +43,11 @@ export class AuthService {
     }
 
     logout() {
+        console.log("LOGOUT!!!!");
         localStorage.removeItem('currentUser');
         localStorage.removeItem('jwtToken');
         this.currentUserSubject.next(null);
+        this.oauthService.logOut();
     }
 
     signup(user: User) {
@@ -54,6 +58,23 @@ export class AuthService {
                 return res;
             }))
         ;
+    }
+
+    googleLogin(context) {
+        // TODO sent googleLogin to server
+        console.log('logged in');
+        const data = {
+            idToken: context.idToken,
+            email: context.idClaims.email.toString(),
+            firstName: context.idClaims.given_name.toString(),
+            lastName: context.idClaims.family_name.toString()
+            // profile_photo: context.idClaims.picture
+        };
+        this.http.post<any>(`${this.authUrl}/oauthLogin`, data).subscribe( res => {
+            console.log('oauthLogin res', res);
+            this.storeCredentials(res);
+        }, err => { console.log('error', err); });
+
     }
 
     isAuthenticated() {
