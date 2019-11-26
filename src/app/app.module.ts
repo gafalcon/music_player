@@ -26,6 +26,7 @@ import { UsersComponent } from './user/users/users.component';
 import { CommentsComponent } from './comments/comments.component';
 import { LikesComponent } from './likes/likes.component';
 
+import { AuthService } from "./shared/services/auth.service";
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { LikesComponent } from './likes/likes.component';
   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        AuthService
     ],
   bootstrap: [AppComponent]
 })

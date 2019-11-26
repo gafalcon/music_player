@@ -5,13 +5,16 @@ import { User } from 'src/app/models/user';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 
+
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
+  plaincode = ""
+  confirm: boolean = false
     form: FormGroup;
     country_list = ['Afghanistan','Albania','Algeria','Andorra','Angola','Anguilla','Antigua &amp; Barbuda','Argentina','Armenia','Aruba','Australia','Austria','Azerbaijan','Bahamas'
 	                  ,'Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bermuda','Bhutan','Bolivia','Bosnia &amp; Herzegovina','Botswana','Brazil','British Virgin Islands'
@@ -77,9 +80,59 @@ export class SignupComponent implements OnInit {
         }
         return addClass;
     }
-    ngOnInit() {
+    //simple get input OTP values and compare to generated OTP
+    checkOTP(OTP: string): void {
+        console.log(OTP);
+        //password match
+      if (this.plaincode == OTP) {
+        console.log(this.plaincode);
+        //write text
+        var info = document.createTextNode("OTP matched");
+        //var page = document.createElement("div")
+        //page.appendChild(info)
+        //document.getElementById("OTP").appendChild(info);
+        this.confirm = true;
+      }
+      else {
+        this.confirm = false;
+      }
     }
+    //simple random keygen (plaintext)
+    makeOTP(length) {
+        var result = '';
+        //values making up random code
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (var x = 0; x < length; x++) {
+          result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+    }
+    //function to send email with OTP to address obtained previously
+    //apparently this requires server backend to send email/SMS request? idk
+    sendEmail(){
+        console.log(this.plaincode);
+        //console.log(this.form.value);
+        //console.log(this.form.value.email);
+        console.log(this.invalidField(this.form.value.email))
+        //check if email is valid
+        //if (this.invalidField(this.form.value.email))
+        if (this.invalidField(this.email)) {
+          //send email
+          console.log("invalid")
+          AuthService
+        }
+        else
+        {
+            
+        }
 
+    }
+    ngOnInit() {
+          //make OTP code
+          this.plaincode = this.makeOTP(5);
+          console.log(this.plaincode);
+          //add some kind of hashing?
+    }
     onSubmit() {
         this.form.markAllAsTouched();
         if (this.form.status !== 'VALID') {
