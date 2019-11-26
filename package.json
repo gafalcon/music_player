@@ -23,6 +23,8 @@
     "amplitudejs": "^5.0.2",
     "angular-oauth2-oidc": "^8.0.4",
     "angular2-notifications": "^2.0.0",
+    "angularfire2": "^5.2.3",
+    "firebase": "^7.5.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

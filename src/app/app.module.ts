@@ -26,7 +26,7 @@ import { UsersComponent } from './user/users/users.component';
 import { CommentsComponent } from './comments/comments.component';
 import { LikesComponent } from './likes/likes.component';
 
-import { AuthService } from "./shared/services/auth.service";
+import { AuthService } from "./auth.service";
 
 @NgModule({
   declarations: [
