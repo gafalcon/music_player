@@ -42,6 +42,15 @@ export class AuthService {
             }));
     }
 
+    reset(usernameOrEmail: string) {
+      // return this.http.post<any>(`${this.authUrl}/reset`, { usernameOrEmail })
+      //     .pipe(map(res => {
+      //         // login succesful if there's a jwt token and an user
+      //         return {status: 'NA'};
+      //     }));
+      return JSON.parse(usernameOrEmail);
+  }
+
     logout() {
         console.log("LOGOUT!!!!");
         localStorage.removeItem('currentUser');

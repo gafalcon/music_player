@@ -10,6 +10,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 import { UsersComponent } from './user/users/users.component';
+import { ResetpswdComponent } from './auth/resetpswd/resetpswd.component';
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'users/:id', component: ProfileComponent },
     { path: 'admin/users', component: UsersComponent },
+    { path: 'resetpswd', component: ResetpswdComponent },
 ];
 
 @NgModule({

@@ -25,6 +25,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { UsersComponent } from './user/users/users.component';
 import { CommentsComponent } from './comments/comments.component';
 import { LikesComponent } from './likes/likes.component';
+import { ResetpswdComponent } from './auth/resetpswd/resetpswd.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { LikesComponent } from './likes/likes.component';
     ProfileComponent,
     UsersComponent,
     CommentsComponent,
-    LikesComponent
+    LikesComponent,
+    ResetpswdComponent
   ],
   imports: [
       BrowserModule,

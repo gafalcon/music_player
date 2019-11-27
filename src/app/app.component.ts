@@ -28,7 +28,7 @@ export class AppComponent {
     }
 
     isAuthRoute() {
-        return this.router.url.startsWith('/login')  || this.router.url === '/signup';
+        return this.router.url.startsWith('/login')  || this.router.url === '/signup' || this.router.url === '/resetpswd';
     }
 
 }
