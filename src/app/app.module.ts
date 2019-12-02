@@ -11,6 +11,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppComponent } from './app.component';
@@ -66,7 +67,8 @@ import { LikesComponent } from './likes/likes.component';
       OAuthModule.forRoot(),
       LoadingBarHttpClientModule,
       LoadingBarRouterModule,
-      LoadingBarModule
+      LoadingBarModule,
+      NgbModule
   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
