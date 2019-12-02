@@ -13,6 +13,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { UserStatus } from 'src/app/models/status';
 import { Album } from 'src/app/models/album';
 import { Playlist } from 'src/app/models/playlist';
+import { NewMessageComponent } from 'src/app/messages/new-message/new-message.component';
 
 @Component({
   selector: 'app-profile',
@@ -93,7 +94,12 @@ export class ProfileComponent implements OnInit {
     }
 
     sendMessage() {
-        // TODO open modal to send message
+        const modalRef = this.modalService.open(NewMessageComponent);
+        modalRef.result.then((result) => {
+            console.log(result);
+        }, (reason) => console.log('Dismissed:' + reason));
+        modalRef.componentInstance.user = this.user;
+        modalRef.componentInstance.senderId = this.currentUser.id;
         console.log('Send message');
     }
 

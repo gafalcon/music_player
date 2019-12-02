@@ -127,7 +127,7 @@ export class ApiService {
 
     updateUserStatus(userId: number, userStatus: UserStatus) {
         const formData = new FormData();
-        formData.append('role', userStatus);
+        formData.append('status', userStatus);
         console.log(formData);
         return this.http.post(`${this.apiURL}/users/${userId}/update_status`, formData);
     }
@@ -163,6 +163,12 @@ export class ApiService {
 
     isLikedDisliked(modelId: number, modelType: string) {
         return this.http.get(`${this.apiURL}/${modelType}/${modelId}/is_liked_disliked`);
+    }
+
+    // Messages
+
+    newMessage(sender_id: number, receiver_id: number, message: string) {
+        return this.http.post(`${this.apiURL}/messages`, {sender_id, receiver_id, message});
     }
 
 }

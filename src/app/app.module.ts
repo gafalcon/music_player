@@ -36,6 +36,8 @@ import { DeleteUserComponent } from './templates/delete-user/delete-user.compone
 import { ChangeUserRoleComponent } from './templates/change-user-role/change-user-role.component';
 import { UserInfoComponent } from './user/user-info/user-info.component';
 import { ListCollectionComponent } from './templates/list-collection/list-collection.component';
+import { NewMessageComponent } from './messages/new-message/new-message.component';
+import { MessagesViewComponent } from './messages/messages-view/messages-view.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { ListCollectionComponent } from './templates/list-collection/list-collec
     DeleteUserComponent,
     ChangeUserRoleComponent,
     UserInfoComponent,
-    ListCollectionComponent
+    ListCollectionComponent,
+    NewMessageComponent,
+    MessagesViewComponent
   ],
   imports: [
       BrowserModule,
@@ -88,7 +92,8 @@ import { ListCollectionComponent } from './templates/list-collection/list-collec
     bootstrap: [AppComponent],
     entryComponents: [DeleteUserComponent,
                       ChangeUserRoleComponent,
-                      ModalComponent
+                      ModalComponent,
+                      NewMessageComponent
                      ]
 })
 export class AppModule { }

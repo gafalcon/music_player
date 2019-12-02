@@ -17,11 +17,6 @@
     <br />
     <div class="row">
         <div class="col">
-            <div class="btn btn-primary">Add New User</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
             <table class="table">
                 <thead>
                     <tr>
@@ -41,16 +36,16 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.role }}</td>
                         <td>
-                            <button class="btn btn-small btn-primary" type="button" (click)="editUser(user)">
+                            <button class="btn btn-small btn-outline-primary" type="button" (click)="editUser(user)">
                                 <span class="oi oi-pencil" title="plus" aria-hidden="true"></span>
                             </button>
-                            <button class="btn btn-small btn-primary btn-delete" type="button">
+                            <button class="btn btn-small btn-outline-primary btn-delete" type="button" (click)="sendMessage(user)">
                                 <span class="oi oi-envelope-closed" title="plus" aria-hidden="true"></span>
                             </button>
-                            <button class="btn btn-small btn-danger btn-delete" type="button">
+                            <button class="btn btn-small btn-delete" [ngClass]="isActive(user) ? 'btn-outline-danger' : 'btn-danger'" type="button" (click)="blockUser(user)">
                                 <span class="oi oi-ban" title="plus" aria-hidden="true"></span>
                             </button>
-                            <button class="btn btn-small btn-danger btn-delete" type="button" (click)="deleteUser(i, user)">
+                            <button class="btn btn-small btn-outline-danger btn-delete" type="button" (click)="deleteUser(i, user)">
                                 <span class="oi oi-delete" title="plus" aria-hidden="true"></span>
                             </button>
                         </td>

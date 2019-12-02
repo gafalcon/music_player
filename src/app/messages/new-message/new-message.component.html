@@ -1,0 +1,23 @@
+
+<div class="modal-header">
+    <h4 class="modal-title">Send Message to User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="">
+            <label>To: <a [routerLink]="['/users/', user.id]">{{ user.username }}</a></label>
+        </div>
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea name="message" class="form-control" id="message" rows="3" [(ngModel)]="message"></textarea>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Cancel')">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="postMessage()">Post Message</button>
+</div>
