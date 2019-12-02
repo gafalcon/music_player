@@ -36,7 +36,7 @@
                 <tbody>
                     <tr *ngFor="let user of users; index as i;">
                         <th scope="row">{{ i + 1 }}</th>
-                        <td><a routerLink="/users/{{user.username}}">{{ user.username }}</a></td>
+                        <td><a routerLink="/users/{{user.id}}">{{ user.username }}</a></td>
                         <td>{{ user.firstName }} {{ user.lastName }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.role }}</td>

@@ -96,7 +96,9 @@ export class SignupComponent implements OnInit {
                               vals.lastName,
                               vals.gender,
                               vals.password,
-                              vals.email, null);
+                              vals.email,
+                              vals.country,
+                              null);
 
         this.authService.signup(user).subscribe((newUser) => {
             console.log(newUser);

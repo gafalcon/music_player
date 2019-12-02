@@ -34,6 +34,7 @@ import { LikesComponent } from './likes/likes.component';
 import { ModalComponent } from './templates/modal/modal.component';
 import { DeleteUserComponent } from './templates/delete-user/delete-user.component';
 import { ChangeUserRoleComponent } from './templates/change-user-role/change-user-role.component';
+import { UserInfoComponent } from './user/user-info/user-info.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ChangeUserRoleComponent } from './templates/change-user-role/change-use
     LikesComponent,
     ModalComponent,
     DeleteUserComponent,
-    ChangeUserRoleComponent
+    ChangeUserRoleComponent,
+    UserInfoComponent
   ],
   imports: [
       BrowserModule,

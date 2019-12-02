@@ -6,6 +6,7 @@ import { Playlist } from '../models/playlist';
 import { Album } from '../models/album';
 import { environment } from '../../environments/environment';
 import { Role } from '../models/role';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -106,7 +107,11 @@ export class ApiService {
         return this.http.delete(`${this.apiURL}/users/${userId}`);
     }
 
-    getUsers() {
-        return this.http.get(`${this.apiURL}/users`);
+    getUser(userId: number) {
+        return this.http.get(`${this.apiURL}/users/${userId}`);
+    }
+
+    getUsers(): Observable<Array<User>> {
+        return this.http.get<Array<User>>(`${this.apiURL}/users`);
     }
 }

@@ -1,93 +1,45 @@
 <div class="emp-profile">
+    <app-user-info [user]="user"></app-user-info>
     <div class="row">
-        <div class="col-md-4">
-            <div class="profile-img">
-                <img src="https://bootdey.com/img/Content/user_3.jpg" alt=""/>
-                <div class="file btn btn-lg btn-primary">
-                    Change Photo
-                    <input type="file" name="file"/>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="profile-head">
-                <h4>
-                    Gabriel Falcones
-                </h4>
-                <h6>
-
-                </h6>
-                <p class="proile-rating">VIEWS : <span>234234234</span></p>
-            </div>
-
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Username</label>
-                    </div>
-                    <div class="col-md-6">
-                        <p>gafalcon</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Name</label>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Gabriel Falcones</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Email</label>
-                    </div>
-                    <div class="col-md-6">
-                        <p>
-                            gabofalc@gmail.com
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Country</label>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Ecuador</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Role</label>
-                    </div>
-                    <div class="col-md-6">
-                        <p>Admin</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-        </div>
-        <div class="col-md-2">
+        <div id="actions" class="col">
+            <button class="btn btn-primary btn-sm btn-action" (click)="editUser()" *ngIf="isCurrentUser(); else msg_button">
+                Edit Info <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <ng-template #msg_button>
+                <button class="btn btn-primary btn-sm btn-action" (click)="sendMessage()">
+                    Message <fa-icon [icon]="faMessage"></fa-icon>
+                </button>
+            </ng-template>
+            <span *ngIf="isAdmin()">
+                <button class="btn btn-warning btn-sm btn-action" (click)="changeRole()">
+                    Change Role <fa-icon [icon]="faUserRole"></fa-icon>
+                </button>
+                <button class="btn btn-danger btn-sm btn-action" (click)="blockUser()">
+                    Block <fa-icon [icon]="faBan"></fa-icon>
+                </button>
+                <button class="btn btn-danger btn-sm btn-action" (click)="deleteUser()">
+                    Delete <fa-icon [icon]="faUserDel"></fa-icon>
+                </button>
+            </span>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="profile-work">
-                <p>Albums</p>
-                <a href="">Classical Essentials</a><br/>
-                <a href="">Hits Alegres</a><br/>
-                <a href="">Pool Party</a><br/>
-                <a href="">PXNDX</a><br/>
-                <p>Playlists</p>
-                <a href="">Radar Latino</a><br/>
-                <a href="">Salsa Nation</a><br/>
-                <a href="">Rock en Español</a><br/>
-                <a href="">Latin Party Anthems</a><br/>
-                <a href="">Paraiso Tropical</a><br/>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>Albums</p>
+                    <a href="">Classical Essentials</a><br/>
+                    <a href="">Hits Alegres</a><br/>
+                    <a href="">Pool Party</a><br/>
+                    <a href="">PXNDX</a><br/>
+                    <p>Playlists</p>
+                    <a href="">Radar Latino</a><br/>
+                    <a href="">Salsa Nation</a><br/>
+                    <a href="">Rock en Español</a><br/>
+                    <a href="">Latin Party Anthems</a><br/>
+                    <a href="">Paraiso Tropical</a><br/>
+                </div>
+            </div>
+            <div class="col-md-8">
             </div>
         </div>
-        <div class="col-md-8">
-        </div>
-    </div>
 </div>
