@@ -7,6 +7,8 @@ import { Album } from '../models/album';
 import { environment } from '../../environments/environment';
 import { Role } from '../models/role';
 import { User } from '../models/user';
+import { UserStatus } from '../models/status';
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -58,29 +60,17 @@ export class ApiService {
     ];
     constructor(private http: HttpClient) { }
 
-    getCurrentPlaylist(): Observable<Array<Song>> {
-        return of(this.songs);
-    }
-
     getPlaylists(): Observable<Array<object>> {
         return this.http.get<Array<object>>(this.apiURL + '/playlists');
     }
 
+    // Albums
     getAlbums(userId: number): Observable<Array<Album>> {
         return this.http.get<Array<Album>>(this.apiURL + '/albums');
     }
 
-    getPlaylist(id): Observable<Playlist> {
-        return this.http.get<Playlist>(this.apiURL + '/playlists/' + id);
-        // return of(data.full_playlists[id]);
-    }
-
-    newSong(data) {
-        return this.http.post<any>(this.apiURL + '/songs', data);
-    }
-
-    uploadSong(data) {
-        return this.http.post(this.apiURL + '/songs/upload', data);
+    getAlbumsByUser(userId: number): Observable<Array<Album>> {
+        return this.http.get<Array<Album>>(`${this.apiURL}/albums/user/${userId}`);
     }
 
     getAlbum(id: number): Observable<Album> {
@@ -95,6 +85,38 @@ export class ApiService {
         return this.http.post(this.apiURL + '/albums/cover', data);
     }
 
+    deleteAlbum(albumId: number) {
+        return this.http.delete(`${this.apiURL}/albums/${albumId}`);
+    }
+
+    // Playlists
+    getPlaylist(id): Observable<Playlist> {
+        return this.http.get<Playlist>(this.apiURL + '/playlists/' + id);
+        // return of(data.full_playlists[id]);
+    }
+
+    getPlaylistsByUser(userId: number): Observable<Array<Playlist>> {
+        return this.http.get<Array<Playlist>>(`${this.apiURL}/playlists/user/${userId}`);
+    }
+
+    getCurrentPlaylist(): Observable<Array<Song>> {
+        return of(this.songs);
+    }
+
+    deletePlaylist(playlistId: number) {
+        return this.http.delete(`${this.apiURL}/playlists/${playlistId}`);
+    }
+
+    // Songs
+    newSong(data) {
+        return this.http.post<any>(this.apiURL + '/songs', data);
+    }
+
+    uploadSong(data) {
+        return this.http.post(this.apiURL + '/songs/upload', data);
+    }
+
+
     // Users
     updateUserRole(userId: number, userRole: Role) {
         const formData = new FormData();
@@ -103,6 +125,12 @@ export class ApiService {
         return this.http.post(`${this.apiURL}/users/${userId}/update_role`, formData);
     }
 
+    updateUserStatus(userId: number, userStatus: UserStatus) {
+        const formData = new FormData();
+        formData.append('role', userStatus);
+        console.log(formData);
+        return this.http.post(`${this.apiURL}/users/${userId}/update_status`, formData);
+    }
     deleteUser(userId: number) {
         return this.http.delete(`${this.apiURL}/users/${userId}`);
     }
@@ -114,4 +142,27 @@ export class ApiService {
     getUsers(): Observable<Array<User>> {
         return this.http.get<Array<User>>(`${this.apiURL}/users`);
     }
+
+    // Comments
+    getAlbumComments(albumId: number) {
+        return this.http.get<Array<Comment>>(`${this.apiURL}/albums/${albumId}/comments`);
+    }
+    postAlbumComment(albumId: number, comment: any) {
+        return this.http.post<Comment>(`${this.apiURL}/albums/${albumId}/comments`, comment);
+    }
+
+    // Likes
+
+    postLike(modelId: number, modelType: string, likeType: string) {
+        return this.http.post(`${this.apiURL}/${modelType}/${modelId}/${likeType}`, null);
+    }
+
+    deleteLike(modelId: number, modelType: string, likeType: string) {
+        return this.http.delete(`${this.apiURL}/${modelType}/${modelId}/${likeType}`);
+    }
+
+    isLikedDisliked(modelId: number, modelType: string) {
+        return this.http.get(`${this.apiURL}/${modelType}/${modelId}/is_liked_disliked`);
+    }
+
 }

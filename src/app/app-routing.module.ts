@@ -21,6 +21,7 @@ const routes: Routes = [
     { path: 'new_song', component: NewSongComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
+    { path: 'users/profile', component: ProfileComponent },
     { path: 'users/:id', component: ProfileComponent },
     { path: 'admin/users', component: UsersComponent },
 ];

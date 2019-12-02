@@ -12,7 +12,7 @@ import { AmplitudeService } from '../services/amplitude.service';
 })
 export class PlaylistComponent implements OnInit {
 
-    playlist = new Playlist('Playlist_name', 'art', null);
+    playlist = new Playlist(1, 'Playlist_name', 'art', null);
     constructor(
         private route: ActivatedRoute,
         // private location: Location,

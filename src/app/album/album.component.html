@@ -1,15 +1,63 @@
 <div class="container">
-<div class="playlist-description row">
-    <img class="col-sm" src="{{ album.coverArt }}">
-    <div class="col-sm" >
-        <h3>
-            {{ album.name }}
-        </h3>
-        <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">Add To Queue</button>
+    <div class="playlist-description row">
+        <img class="col-sm" src="{{ album.coverArt }}">
+        <div class="col-sm" >
+            <h3>
+                {{ album.name }}
+            </h3>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for="">Artist</label>
+                </div>
+                <div class="col-md-6">
+                    {{ album.artist }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for="">Release Date</label>
+                </div>
+                <div class="col-md-6">
+                    {{ album.releaseDate | date }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for=""># Likes</label>
+                </div>
+                <div class="col-md-6">
+                    {{ album.totalLikes }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for=""># Dislikes</label>
+                </div>
+                <div class="col-md-6">
+                    {{ album.totalDislikes }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for=""># Reproductions</label>
+                </div>
+                <div class="col-md-6">
+                    {{ album.totalReproductions }}
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">Add To Queue</button>
+        </div>
     </div>
-</div>
-<br />
-<app-likes></app-likes>
-<app-song-list [songs]="album.songs"></app-song-list>
-<app-comments></app-comments>
+    <br />
+    <app-likes [model]="album" [modelType]="'albums'" (likeEvent)="likeEvent($event)" [liked]="liked" [disliked]="disliked"></app-likes>
+    <app-song-list [songs]="album.songs"></app-song-list>
+    <br />
+    <div class="row">
+        <div class="col">
+            <app-comments [comments]="comments"
+                          (postComment)="createComment($event)"
+                          [enablePost]="currentUser"
+            ></app-comments>
+        </div>
+    </div>
 </div>

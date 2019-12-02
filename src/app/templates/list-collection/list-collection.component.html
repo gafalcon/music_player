@@ -1,0 +1,17 @@
+<table class="table">
+    <tbody>
+        <tr *ngFor="let item of collection; index as i">
+            <th scope="row">
+                <a [routerLink]="[link, item.id]">
+                    {{ item.name }}
+                </a>
+            </th>
+            <td>{{ item.songs.length }} songs</td>
+            <td *ngIf="deleteEnabled">
+                <button class="btn btn-sm btn-danger" (click)="onDelete.emit(i)">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

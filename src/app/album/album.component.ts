@@ -5,6 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { AmplitudeService } from '../services/amplitude.service';
 import { Album } from '../models/album';
+import { Comment } from '../models/comment'
+import { AuthService } from '../services/auth.service';
+import { User } from '../models/user';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-album',
@@ -14,27 +18,67 @@ import { Album } from '../models/album';
 export class AlbumComponent implements OnInit {
 
     album = new Album(1, '', '', '', '', []);
+    comments = [];
+    currentUser: User;
+    liked = false;
+    disliked = false;
+
     constructor(
         private route: ActivatedRoute,
-        // private location: Location,
+        private notifier: NotificationsService,
         private api: ApiService,
-        private amplitude: AmplitudeService
+        private amplitude: AmplitudeService,
+        private auth: AuthService
     ) { }
 
     ngOnInit() {
-        this.getAlbum();
+        this.getData();
+        this.auth.currentUser.subscribe((user) => {
+            this.currentUser = user;
+            console.log(this.currentUser);
+        });
     }
 
-    getAlbum() {
+    getData() {
         const id = +this.route.snapshot.paramMap.get('id');
         this.api.getAlbum(id)
             .subscribe(album => {
                 this.album = album;
             } );
+
+        this.api.getAlbumComments(id).subscribe((comments) => {
+            this.comments = comments;
+            console.log(comments);
+        });
+
+        this.api.isLikedDisliked(id, 'albums').subscribe((res: any) => {
+            console.log('likes');
+            console.log(res);
+            if (res.success) {
+                if (res.message === 'liked') {
+                    this.liked = true;
+                } else {
+                    this.disliked = true;
+                }
+            }
+        });
     }
+
 
     addPlaylistToQueue() {
         this.amplitude.addSongs(this.album.songs);
     }
 
+    createComment(comment: string) {
+        console.log('new comment!!!' + comment);
+        this.api.postAlbumComment(this.album.id, {comment}).subscribe((newComment) => {
+            newComment.username = this.currentUser.username;
+            this.comments.unshift(newComment);
+            this.notifier.success('New comment posted!');
+        });
+    }
+
+    likeEvent(event: string) {
+        this.notifier.success(event);
+    }
 }

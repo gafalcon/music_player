@@ -1,24 +1,25 @@
-<div class="row bootstrap snippets" *ngIf="currentUser">
-    <div class="col-md-6 col-md-offset-2 col-sm-12">
+<div class="row bootstrap snippets">
+    <div class="col">
         <div class="comment-wrapper">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h2>Comments</h2>
                 </div>
                 <div class="panel-body">
-                    <textarea [(ngModel)]="newComment" class="form-control" placeholder="write a comment..." rows="3"></textarea>
-                    <br>
-                    <button type="button" class="btn btn-primary pull-right" (click)="addComment()">Post</button>
+                    <div class="post-comment" *ngIf="enablePost">
+                        <textarea [(ngModel)]="newComment" class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                        <button id="post-comment" type="button" class="btn btn-primary pull-right" (click)="addComment()">Post</button>
+                    </div>
                     <div class="clearfix"></div>
                     <hr>
                     <ul class="media-list">
                         <li class="media" *ngFor="let comment of comments">
                             <a href="#" class="pull-left">
-                                <img src="{{ comment.img }}" alt="" class="img-circle">
+                                <img src="{{ comment.userPhoto }}" alt="" class="img-circle">
                             </a>
                             <div class="media-body">
                                 <span class="text-muted pull-right">
-                                    <small class="text-muted">{{ comment.date }}</small>
+                                    <small class="text-muted">{{ comment.createdAt  | date }}</small>
                                 </span>
                                 <strong class="text-success">{{ comment.username }}</strong>
                                 <p>
