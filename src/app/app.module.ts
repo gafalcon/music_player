@@ -12,7 +12,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
@@ -31,6 +31,9 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { UsersComponent } from './user/users/users.component';
 import { CommentsComponent } from './comments/comments.component';
 import { LikesComponent } from './likes/likes.component';
+import { ModalComponent } from './templates/modal/modal.component';
+import { DeleteUserComponent } from './templates/delete-user/delete-user.component';
+import { ChangeUserRoleComponent } from './templates/change-user-role/change-user-role.component';
 
 
 @NgModule({
@@ -49,7 +52,10 @@ import { LikesComponent } from './likes/likes.component';
     ProfileComponent,
     UsersComponent,
     CommentsComponent,
-    LikesComponent
+    LikesComponent,
+    ModalComponent,
+    DeleteUserComponent,
+    ChangeUserRoleComponent
   ],
   imports: [
       BrowserModule,
@@ -68,12 +74,17 @@ import { LikesComponent } from './likes/likes.component';
       LoadingBarHttpClientModule,
       LoadingBarRouterModule,
       LoadingBarModule,
-      NgbModule
+      NgbModule,
+      FontAwesomeModule
   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
     ],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [DeleteUserComponent,
+                      ChangeUserRoleComponent,
+                      ModalComponent
+                     ]
 })
 export class AppModule { }

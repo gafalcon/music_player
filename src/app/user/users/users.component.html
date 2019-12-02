@@ -37,11 +37,11 @@
                     <tr *ngFor="let user of users; index as i;">
                         <th scope="row">{{ i + 1 }}</th>
                         <td><a routerLink="/users/{{user.username}}">{{ user.username }}</a></td>
-                        <td>{{ user.name }}</td>
+                        <td>{{ user.firstName }} {{ user.lastName }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ user.rol }}</td>
+                        <td>{{ user.role }}</td>
                         <td>
-                            <button class="btn btn-small btn-primary" type="button" (click)="editUser(i)">
+                            <button class="btn btn-small btn-primary" type="button" (click)="editUser(user)">
                                 <span class="oi oi-pencil" title="plus" aria-hidden="true"></span>
                             </button>
                             <button class="btn btn-small btn-primary btn-delete" type="button">
@@ -50,7 +50,7 @@
                             <button class="btn btn-small btn-danger btn-delete" type="button">
                                 <span class="oi oi-ban" title="plus" aria-hidden="true"></span>
                             </button>
-                            <button class="btn btn-small btn-danger btn-delete" type="button" (click)="deleteUser(i)">
+                            <button class="btn btn-small btn-danger btn-delete" type="button" (click)="deleteUser(i, user)">
                                 <span class="oi oi-delete" title="plus" aria-hidden="true"></span>
                             </button>
                         </td>

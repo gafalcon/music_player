@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
+import { ApiService } from 'src/app/services/api.service';
+import { User } from 'src/app/models/user';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeUserRoleComponent } from 'src/app/templates/change-user-role/change-user-role.component';
+import { DeleteUserComponent } from 'src/app/templates/delete-user/delete-user.component';
 
 @Component({
   selector: 'app-users',
@@ -8,34 +13,44 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class UsersComponent implements OnInit {
 
-    allUsers = [
-        {username: 'gafalcon', name: 'Gabriel', email: 'gabofalc@gmail.com', rol: 'Admin'},
-        {username: 'vinod', name: 'Vinod', email: 'vinod@gmail.com', rol: 'User'},
-        {username: 'ishan', name: 'Ishan', email: 'ishan@gmail.com', rol: 'User'},
-        {username: 'alex', name: 'Alex', email: 'alex@gmail.com', rol: 'User'},
-        {username: 'jeremiah', name: 'Jeremiah', email: 'jeremiah', rol: 'User'},
-        // {username: '', name: '', email: '', rol: ''},
-    ];
-
-    users: Array<any>;
+    users: Array<User>;
     constructor(
-        private notifier: NotificationsService
+        private notifier: NotificationsService,
+        private api: ApiService,
+        private modalService: NgbModal
     ) {
-        this.users = this.allUsers;
     }
 
     ngOnInit() {
+        this.api.getUsers().subscribe((users: Array<User>) => {
+            this.users = users;
+        }, (error) => console.log(error));
     }
 
-    deleteUser(i) {
-        if (confirm("Are you sure you want to delete this User?")) {
-            this.users.splice(i, 1);
-            this.notifier.success("User deleted");
-        }
+    deleteUser(i: number, user: User) {
+        const modalRef = this.modalService.open(DeleteUserComponent);
+        modalRef.result.then((result) => {
+            console.log(result);
+            if (result === 'deleted') {
+                this.users.splice(i, 1);
+            }
+        }, (reason) => console.log('Dismissed:' + reason));
+        modalRef.componentInstance.user = user;
     }
 
-    editUser(i) {
-        console.log(i);
+    editUser(user: User) {
+        const modalRef = this.modalService.open(ChangeUserRoleComponent);
+        modalRef.result.then(
+            (result) => {
+                console.log(result);
+                if (result.role) {
+                    const role = (result.role);
+                    user.role = role;
+                }
+            },
+            (reason) => console.log('Dismissed:' + reason)
+        );
+        modalRef.componentInstance.user = user;
     }
 
 }

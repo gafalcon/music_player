@@ -5,13 +5,14 @@ import { Song } from '../models/song';
 import { Playlist } from '../models/playlist';
 import { Album } from '../models/album';
 import { environment } from '../../environments/environment';
+import { Role } from '../models/role';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-    private apiURL = `${environment.apiUrl}/api/`;
+    private apiURL = `${environment.apiUrl}/api`;
     songs: Array<Song> = [
         {
             id: 1,
@@ -61,36 +62,51 @@ export class ApiService {
     }
 
     getPlaylists(): Observable<Array<object>> {
-        return this.http.get<Array<object>>(this.apiURL + 'playlists');
+        return this.http.get<Array<object>>(this.apiURL + '/playlists');
     }
 
     getAlbums(userId: number): Observable<Array<Album>> {
-        return this.http.get<Array<Album>>(this.apiURL + 'albums');
+        return this.http.get<Array<Album>>(this.apiURL + '/albums');
     }
 
     getPlaylist(id): Observable<Playlist> {
-        return this.http.get<Playlist>(this.apiURL + 'playlists/' + id);
+        return this.http.get<Playlist>(this.apiURL + '/playlists/' + id);
         // return of(data.full_playlists[id]);
     }
 
     newSong(data) {
-        return this.http.post<any>(this.apiURL + 'songs', data);
+        return this.http.post<any>(this.apiURL + '/songs', data);
     }
 
     uploadSong(data) {
-        return this.http.post(this.apiURL + 'songs/upload', data);
+        return this.http.post(this.apiURL + '/songs/upload', data);
     }
 
     getAlbum(id: number): Observable<Album> {
-        return this.http.get<Album>(this.apiURL + 'albums/' + String(id));
+        return this.http.get<Album>(this.apiURL + '/albums/' + String(id));
     }
 
     newAlbum(album: Album) {
-        return this.http.post<Album>(this.apiURL + 'albums', album);
+        return this.http.post<Album>(this.apiURL + '/albums', album);
     }
 
     uploadAlbumCover(data: any) {
-        return this.http.post(this.apiURL + 'albums/cover', data);
+        return this.http.post(this.apiURL + '/albums/cover', data);
     }
 
+    // Users
+    updateUserRole(userId: number, userRole: Role) {
+        const formData = new FormData();
+        formData.append('role', userRole);
+        console.log(formData);
+        return this.http.post(`${this.apiURL}/users/${userId}/update_role`, formData);
+    }
+
+    deleteUser(userId: number) {
+        return this.http.delete(`${this.apiURL}/users/${userId}`);
+    }
+
+    getUsers() {
+        return this.http.get(`${this.apiURL}/users`);
+    }
 }
