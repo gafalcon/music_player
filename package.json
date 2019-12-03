@@ -23,6 +23,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "@ng-select/ng-select": "^3.7.0",
     "@ngx-loading-bar/core": "^4.2.0",
     "@ngx-loading-bar/http-client": "^4.2.0",
     "@ngx-loading-bar/router": "^4.2.0",

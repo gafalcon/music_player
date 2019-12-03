@@ -13,6 +13,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
@@ -83,7 +84,8 @@ import { MessagesViewComponent } from './messages/messages-view/messages-view.co
       LoadingBarRouterModule,
       LoadingBarModule,
       NgbModule,
-      FontAwesomeModule
+      FontAwesomeModule,
+      NgSelectModule
   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

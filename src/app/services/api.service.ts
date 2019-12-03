@@ -189,4 +189,8 @@ export class ApiService {
 
     // }
 
+    // Genres
+    getGenres() {
+        return this.http.get(`${this.apiURL}/genres`);
+    }
 }

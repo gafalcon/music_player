@@ -20,6 +20,7 @@ export class NewAlbumComponent implements OnInit {
     public invalidImage = false;
     public imgFileError = '';
     public audioFileError = [];
+    public genres = [];
     constructor(
         private formBuilder: FormBuilder,
         private apiService: ApiService,
@@ -32,11 +33,16 @@ export class NewAlbumComponent implements OnInit {
             artist: ['', Validators.required],
             release_date: ['', Validators.required],
             songs: this.formBuilder.array([]),
-            cover_art_img: ['']
+            cover_art_img: [''],
+            genres: []
         });
     }
 
     ngOnInit() {
+        this.apiService.getGenres().subscribe((res: any) => {
+            this.genres = res;
+            console.log(this.genres);
+        });
     }
     get songs() {
         return this.form.get('songs') as FormArray;
@@ -58,6 +64,10 @@ export class NewAlbumComponent implements OnInit {
     }
 
     onSubmit() {
+        console.log(this.form.value);
+        this.form.value.genres = this.form.value.genres.join();
+        console.log(this.form.value);
+        return;
         this.wasValidated = true;
         if (this.form.status !== 'VALID') {
             this.notifier.error('There are errors in your form');
@@ -95,7 +105,7 @@ export class NewAlbumComponent implements OnInit {
     }
 
     imageSelected(files: FileList) {
-        if (files.length === 0){
+        if (files.length === 0) {
             return;
         }
         const mimeType = files[0].type;

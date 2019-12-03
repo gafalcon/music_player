@@ -10,7 +10,8 @@ export class Album {
         public artist: string,
         public releaseDate: string,
         public coverArt: string,
-        public songs: Array<Song>
+        public songs: Array<Song>,
+        public genres: string
     ) {
     }
 

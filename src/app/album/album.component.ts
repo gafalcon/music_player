@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { AmplitudeService } from '../services/amplitude.service';
 import { Album } from '../models/album';
-import { Comment } from '../models/comment'
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
 import { NotificationsService } from 'angular2-notifications';
@@ -17,7 +16,7 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class AlbumComponent implements OnInit {
 
-    album = new Album(1, '', '', '', '', []);
+    album = new Album(1, '', '', '', '', [], '');
     comments = [];
     currentUser: User;
     liked = false;
