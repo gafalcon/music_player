@@ -11,21 +11,23 @@ import { AuthGuard } from './helpers/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 import { UsersComponent } from './user/users/users.component';
 import { MessagesViewComponent } from './messages/messages-view/messages-view.component';
+import { SongComponent } from './song/song.component';
 
 
 
 const routes: Routes = [
     { path: '', component: AlbumCollectionComponent },
-    { path: 'album/create', component: NewAlbumComponent, canActivate: [AuthGuard]},
+    { path: 'album/new', component: NewAlbumComponent, canActivate: [AuthGuard]},
     { path: 'album/:id', component: AlbumComponent },
     { path: 'playlist/:id', component: PlaylistComponent },
-    { path: 'new_song', component: NewSongComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'users/profile', component: ProfileComponent },
     { path: 'users/messages', component: MessagesViewComponent },
     { path: 'users/:id', component: ProfileComponent },
-    { path: 'admin/users', component: UsersComponent }
+    { path: 'admin/users', component: UsersComponent },
+    { path: 'songs/new', component: NewSongComponent, canActivate: [AuthGuard]},
+    { path: 'songs/:id', component: SongComponent},
 ];
 
 @NgModule({

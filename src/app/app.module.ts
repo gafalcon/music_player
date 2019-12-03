@@ -39,6 +39,7 @@ import { UserInfoComponent } from './user/user-info/user-info.component';
 import { ListCollectionComponent } from './templates/list-collection/list-collection.component';
 import { NewMessageComponent } from './messages/new-message/new-message.component';
 import { MessagesViewComponent } from './messages/messages-view/messages-view.component';
+import { SongComponent } from './song/song.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { MessagesViewComponent } from './messages/messages-view/messages-view.co
     UserInfoComponent,
     ListCollectionComponent,
     NewMessageComponent,
-    MessagesViewComponent
+    MessagesViewComponent,
+    SongComponent
   ],
   imports: [
       BrowserModule,

@@ -23,6 +23,14 @@
             </div>
             <div class="row">
                 <div class="label col-md-4">
+                    <label for="">Genres</label>
+                </div>
+                <div class="col-md-6">
+                    {{ album.genres }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
                     <label for=""># Likes</label>
                 </div>
                 <div class="col-md-6">
@@ -50,7 +58,7 @@
     </div>
     <br />
     <app-likes [model]="album" [modelType]="'albums'" (likeEvent)="likeEvent($event)" [liked]="liked" [disliked]="disliked"></app-likes>
-    <app-song-list [songs]="album.songs"></app-song-list>
+    <app-song-list [songs]="album.songs" [isLoggedIn]="currentUser"></app-song-list>
     <br />
     <div class="row">
         <div class="col">

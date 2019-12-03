@@ -12,15 +12,16 @@
                 <button type="button" class="btn btn-light add-button btn-circle" (click)="addSongToQueue(song)" >
                     <span class="oi oi-plus" title="plus" aria-hidden="true"></span>
                 </button>
+                <button type="button" class="btn btn-light add-button btn-circle" (click)="likeSong(song)" *ngIf="isLoggedIn">
+                    <fa-icon [icon]="faHeart"></fa-icon>
+                </button>
                 <div class="dropdown more-button song-button">
                     <button class="btn btn-light btn-circle dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Add to playlist</a>
-                        <a class="dropdown-item" href="#">Add to Queue</a>
-                        <a class="dropdown-item" href="#">View Author</a>
-                        <a class="dropdown-item" href="#">View Song</a>
-                        <a class="dropdown-item" href="#">Add to Favorites</a>
+                        <a class="dropdown-item"  style="cursor:pointer" *ngIf="isLoggedIn">Add to playlist</a>
+                        <a class="dropdown-item" style="cursor:pointer" (click)="addSongToQueue(song)">Add to Queue</a>
+                        <a class="dropdown-item" [routerLink]="['/songs', song.id]">View Song</a>
                     </div>
                 </div>
             </div>
