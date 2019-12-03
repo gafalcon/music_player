@@ -10,7 +10,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { ProfileComponent } from './user/profile/profile.component';
 import { UsersComponent } from './user/users/users.component';
-import { NewMessageComponent } from './messages/new-message/new-message.component';
+import { MessagesViewComponent } from './messages/messages-view/messages-view.component';
 
 
 
@@ -23,9 +23,9 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'users/profile', component: ProfileComponent },
+    { path: 'users/messages', component: MessagesViewComponent },
     { path: 'users/:id', component: ProfileComponent },
-    { path: 'admin/users', component: UsersComponent },
-    { path: 'test', component: NewMessageComponent }
+    { path: 'admin/users', component: UsersComponent }
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Song } from '../models/song';
 import { Playlist } from '../models/playlist';
@@ -9,6 +9,7 @@ import { Role } from '../models/role';
 import { User } from '../models/user';
 import { UserStatus } from '../models/status';
 import { Comment } from '../models/comment';
+import { Message } from '../models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -170,5 +171,22 @@ export class ApiService {
     newMessage(sender_id: number, receiver_id: number, message: string) {
         return this.http.post(`${this.apiURL}/messages`, {sender_id, receiver_id, message});
     }
+
+    getSentMessages() {
+        return this.http.get<Array<Message>>(`${this.apiURL}/messages/sent`);
+    }
+
+    getReceivedMessages() {
+        return this.http.get<Array<Message>>(`${this.apiURL}/messages/received`);
+    }
+
+    getAllMessages() {
+        const sent = this.getSentMessages();
+        const received = this.getReceivedMessages();
+        return forkJoin([sent, received]);
+    }
+    // getConversations() {
+
+    // }
 
 }
