@@ -34,7 +34,7 @@ export class AlbumCollectionComponent implements OnInit {
     addAlbumToQueue(id: number) {
         this.apiService.getAlbum(id).subscribe(
             album => {
-                this.ampService.addSongs(album.songs);
+                this.ampService.addSongs(album.songs, album.id);
             }
         );
     }

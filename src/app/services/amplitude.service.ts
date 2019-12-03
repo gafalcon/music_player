@@ -3,61 +3,22 @@ import * as Amplitude from 'amplitudejs';
 import { ApiService } from './api.service';
 import { Song } from '../models/song';
 import { NotificationsService } from 'angular2-notifications';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AmplitudeService {
 
+    private apiURL = `${environment.apiUrl}/api`;
+
     constructor(
         private api: ApiService,
-        private notifier: NotificationsService
+        private notifier: NotificationsService,
+        private http: HttpClient
     ) { }
 
-    songsToAdd = [
-  {
-    'name': 'Terrain',
-    'artist': 'pg.lost',
-    'album': 'Key',
-    'url': 'https://521dimensions.com/song/Terrain-pglost.mp3',
-    'cover_art_url': 'https://521dimensions.com/img/open-source/amplitudejs/album-art/key.jpg'
-  },
-  {
-    'name': 'Vorel',
-    'artist': 'Russian Circles',
-    'album': 'Guidance',
-    'url': 'https://521dimensions.com/song/Vorel-RussianCircles.mp3',
-    'cover_art_url': 'https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg'
-  },
-  {
-    'name': 'Intro / Sweet Glory',
-    'artist': 'Jimkata',
-    'album': 'Die Digital',
-    'url': 'https://521dimensions.com/song/IntroSweetGlory-Jimkata.mp3',
-    'cover_art_url': 'https://521dimensions.com/img/open-source/amplitudejs/album-art/die-digital.jpg'
-  },
-  {
-    'name': 'Offcut #6',
-    'artist': 'Little People',
-    'album': 'We Are But Hunks of Wood Remixes',
-    'url': 'https://521dimensions.com/song/Offcut6-LittlePeople.mp3',
-    'cover_art_url': 'https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-but-hunks-of-wood.jpg'
-  },
-  {
-    'name': 'Dusk To Dawn',
-    'artist': 'Emancipator',
-    'album': 'Dusk To Dawn',
-    'url': 'https://521dimensions.com/song/DuskToDawn-Emancipator.mp3',
-    'cover_art_url': 'https://521dimensions.com/img/open-source/amplitudejs/album-art/from-dusk-to-dawn.jpg'
-  },
-  {
-    'name': 'Anthem',
-    'artist': 'Emancipator',
-    'album': 'Soon It Will Be Cold Enough',
-    'url': 'https://521dimensions.com/song/Anthem-Emancipator.mp3',
-    'cover_art_url': 'https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg'
-  }
-];
     currentSongs: Array<Song>;
     startAmplitude() {
         this.api.getCurrentPlaylist().subscribe(
@@ -69,11 +30,23 @@ export class AmplitudeService {
                     callbacks: {
                         song_change: () => {
                             this.notifier.success('Playing: ' + Amplitude.getActiveSongMetadata().name);
+                        },
+                        ended: () => {
+                            console.log('Ended' + Amplitude.getActiveSongMetadata().name);
+                            this.postSongReproduced(Amplitude.getActiveSongMetadata().id);
                         }
                     }
                 });
             }
         );
+    }
+
+    postSongReproduced(songId: number) {
+        this.http.post(`${this.apiURL}/songs/${songId}/repr`, null).subscribe(res => console.log(res));
+    }
+
+    postAlbumReproduced(albumId: number) {
+        this.http.post(`${this.apiURL}/albums/${albumId}/repr`, null).subscribe(res => console.log(res));
     }
 
     addSong(song: Song) {
@@ -83,10 +56,13 @@ export class AmplitudeService {
         this.notifier.success(song.name + ' added to Queue');
     }
 
-    addSongs(songs: Array<Song>) {
+    addSongs(songs: Array<Song>, albumId?: number) {
         this.currentSongs.push(...songs);
         Amplitude.bindNewElements();
         this.notifier.success('Songs added to Queue');
+        if (albumId) {
+            this.postAlbumReproduced(albumId);
+        }
     }
 
     playNow(song: Song) {
