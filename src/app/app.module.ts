@@ -14,6 +14,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CarouselModule } from 'primeng/carousel';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
@@ -40,6 +41,8 @@ import { ListCollectionComponent } from './templates/list-collection/list-collec
 import { NewMessageComponent } from './messages/new-message/new-message.component';
 import { MessagesViewComponent } from './messages/messages-view/messages-view.component';
 import { SongComponent } from './song/song.component';
+import { HomeComponent } from './home/home.component';
+import { PlaylistsModalComponent } from './playlists-modal/playlists-modal.component';
 
 
 @NgModule({
@@ -66,7 +69,9 @@ import { SongComponent } from './song/song.component';
     ListCollectionComponent,
     NewMessageComponent,
     MessagesViewComponent,
-    SongComponent
+    SongComponent,
+    HomeComponent,
+    PlaylistsModalComponent
   ],
   imports: [
       BrowserModule,
@@ -87,7 +92,8 @@ import { SongComponent } from './song/song.component';
       LoadingBarModule,
       NgbModule,
       FontAwesomeModule,
-      NgSelectModule
+      NgSelectModule,
+      CarouselModule
   ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -97,7 +103,8 @@ import { SongComponent } from './song/song.component';
     entryComponents: [DeleteUserComponent,
                       ChangeUserRoleComponent,
                       ModalComponent,
-                      NewMessageComponent
+                      NewMessageComponent,
+                      PlaylistsModalComponent
                      ]
 })
 export class AppModule { }

@@ -1,0 +1,15 @@
+.playlist-description {
+    margin-top: 20px;
+}
+.playlist-description img {
+    max-width: 450px;
+    max-height: 450px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.lyrics {
+    max-height: 200px;
+}

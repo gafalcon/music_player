@@ -25,6 +25,10 @@ export class ApiService {
             album: 'We Are to Answer',
             url: 'https://521dimensions.com/song/Ancient Astronauts - Risin\' High (feat Raashan Ahmad).mp3',
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg'
+
+            ,totalLikes: 0,
+            totalDislikes: 0,
+            totalReproductions:0
         },
         {
             id: 2,
@@ -33,6 +37,9 @@ export class ApiService {
             album: 'Ask The Dust',
             url: 'https://521dimensions.com/song/08 The Gun.mp3',
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/ask-the-dust.jpg'
+            ,totalLikes: 0,
+            totalDislikes: 0,
+            totalReproductions:0
         },
         {
             id: 3,
@@ -41,6 +48,9 @@ export class ApiService {
             album: 'Anvil',
             url: 'https://521dimensions.com/song/LORN - ANVIL.mp3',
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/anvil.jpg'
+            ,totalLikes: 0,
+            totalDislikes: 0,
+            totalReproductions:0
         },
         {
             id: 4,
@@ -49,6 +59,9 @@ export class ApiService {
             album: 'We Are to Answer',
             url: 'https://521dimensions.com/song/ICameRunning-AncientAstronauts.mp3',
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg'
+            ,totalLikes: 0,
+            totalDislikes: 0,
+            totalReproductions:0
         },
         {
             id: 5,
@@ -57,6 +70,9 @@ export class ApiService {
             album: 'Soon It Will Be Cold Enough',
             url: 'https://521dimensions.com/song/FirstSnow-Emancipator.mp3',
             cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg'
+            ,totalLikes: 0,
+            totalDislikes: 0,
+            totalReproductions:0
         }
     ];
     constructor(private http: HttpClient) { }
@@ -66,8 +82,24 @@ export class ApiService {
     }
 
     // Albums
-    getAlbums(userId: number): Observable<Array<Album>> {
-        return this.http.get<Array<Album>>(this.apiURL + '/albums');
+    getMostLikedAlbums(): Observable<Array<Album>> {
+        return this.http.get<Array<Album>>(`${this.apiURL}/albums/likes/most`);
+    }
+
+    getRecentlyPlayedAlbums(): Observable<Array<Album>> {
+        return this.http.get<Array<Album>>(`${this.apiURL}/albums/reprs/recent`);
+    }
+
+    getRecentAlbums(): Observable<Array<Album>> {
+        return this.http.get<Array<Album>>(`${this.apiURL}/albums/recent`);
+    }
+
+    getMostReproducedAlbums(): Observable<Array<Album>> {
+        return this.http.get<Array<Album>>(`${this.apiURL}/albums/reprs/most`);
+    }
+
+    getAlbums(): Observable<Array<Album>> {
+        return this.http.get<Array<Album>>(`${this.apiURL}/albums`);
     }
 
     getAlbumsByUser(userId: number): Observable<Array<Album>> {
@@ -108,6 +140,14 @@ export class ApiService {
         return this.http.delete(`${this.apiURL}/playlists/${playlistId}`);
     }
 
+    newPlaylist(playlistName: string, songId: number) {
+        return this.http.post(`${this.apiURL}/playlists`, {name: playlistName, songId});
+    }
+
+    addSongToPlaylist(playlistId: number, songId: number) {
+        return this.http.post(`${this.apiURL}/playlists/${playlistId}/add/${songId}`, null);
+    }
+
     // Songs
     newSong(data) {
         return this.http.post<any>(this.apiURL + '/songs', data);
@@ -115,6 +155,10 @@ export class ApiService {
 
     uploadSong(data) {
         return this.http.post(this.apiURL + '/songs/upload', data);
+    }
+
+    getSong(songId: number): Observable<Song> {
+        return this.http.get<Song>(`${this.apiURL}/songs/${songId}`);
     }
 
 
@@ -150,6 +194,13 @@ export class ApiService {
     }
     postAlbumComment(albumId: number, comment: any) {
         return this.http.post<Comment>(`${this.apiURL}/albums/${albumId}/comments`, comment);
+    }
+
+    getSongComments(songId: number) {
+        return this.http.get<Array<Comment>>(`${this.apiURL}/songs/${songId}/comments`);
+    }
+    postSongComment(songId: number, comment: any) {
+        return this.http.post<Comment>(`${this.apiURL}/songs/${songId}/comments`, comment);
     }
 
     // Likes

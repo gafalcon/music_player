@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 // import { Location } from '@angular/common';
 import { ApiService } from '../services/api.service';
 import { AmplitudeService } from '../services/amplitude.service';
+import { User } from '../models/user';
+import { AuthService } from '../services/auth.service';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-playlist',
@@ -12,16 +15,19 @@ import { AmplitudeService } from '../services/amplitude.service';
 })
 export class PlaylistComponent implements OnInit {
 
-    playlist = new Playlist(1, 'Playlist_name', 'art', null);
+    faPlus = faPlus;
+    playlist: Playlist;
+    currentUser: User;
     constructor(
         private route: ActivatedRoute,
-        // private location: Location,
+        private auth: AuthService,
         private api: ApiService,
         private amplitude: AmplitudeService
     ) { }
 
     ngOnInit() {
         this.getPlaylist();
+        this.auth.currentUser.subscribe(user => this.currentUser = user);
     }
 
     getPlaylist() {
@@ -29,6 +35,7 @@ export class PlaylistComponent implements OnInit {
         this.api.getPlaylist(id)
             .subscribe(playlist => {
                 this.playlist = playlist;
+                console.log(playlist);
             } );
     }
 

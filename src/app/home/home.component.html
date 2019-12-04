@@ -1,0 +1,5 @@
+<br />
+<app-album-collection [collection]="recentlyPlayedAlbums" title="Recently Played Albums" (addToQueue)="addAlbumToQueue($event)"></app-album-collection>
+<app-album-collection [collection]="mostLikedAlbums" title="Most Liked Albums" (addToQueue)="addAlbumToQueue($event)"></app-album-collection>
+<app-album-collection [collection]="mostPlayedAlbums" title="Most Played Albums" (addToQueue)="addAlbumToQueue($event)"></app-album-collection>
+<app-album-collection [collection]="recentAlbums" title="Recently Created Albums" (addToQueue)="addAlbumToQueue($event)"></app-album-collection>

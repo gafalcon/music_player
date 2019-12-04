@@ -1,6 +1,6 @@
 <div class="container">
     <div class="playlist-description row">
-        <img class="col-sm" src="{{ album.coverArt }}">
+        <img class="col-sm" src="{{ album.cover_art_url }}">
         <div class="col-sm" >
             <h3>
                 {{ album.name }}
@@ -53,7 +53,9 @@
                     {{ album.totalReproductions }}
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">Add To Queue</button>
+            <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">
+                Add To Queue <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
         </div>
     </div>
     <br />

@@ -1,11 +1,12 @@
-h1{
+h1 {
     color: black;
     margin-top: 10px;
     font-family: "Lato", sans-serif;
 }
 
 div.song-to-add {
-    width: 45%;
+    /* width: 5%; */
+    width: 100%;
     padding: 10px;
     background-color: white;
     margin: 5px;
@@ -36,3 +37,4 @@ div.song-to-add a.add-to-playlist-button {
     div.song-to-add {
         width: 40%;
         padding: 5px; } }
+

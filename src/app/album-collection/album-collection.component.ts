@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AmplitudeService } from '../services/amplitude.service';
-import { ApiService } from '../services/api.service';
-import { Album } from '../models/album';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-album-collection',
@@ -10,37 +8,15 @@ import { Album } from '../models/album';
 })
 export class AlbumCollectionComponent implements OnInit {
 
-    playlists: Array<object>;
-    albums: Array<Album>;
-    constructor(private ampService: AmplitudeService, private apiService: ApiService) { }
+    @Input() collection = [];
+    @Input() title = 'Collection';
+    @Input() collectionType = 'album';
+    @Output() addToQueue = new EventEmitter<any>();
+    dots = 'carousel-dots';
+    faPlay = faPlay;
+    constructor() {}
 
     ngOnInit() {
-        this.apiService.getPlaylists().subscribe(
-            playlists => this.playlists = playlists
-        );
-        this.apiService.getAlbums(0).subscribe(
-            albums => {
-                this.albums = albums;
-            }
-        );
-    }
-
-    addPlaylistToQueue(id: number) {
-        this.apiService.getPlaylist(id).subscribe(
-            playlist => this.ampService.addSongs(playlist.songs)
-        );
-    }
-
-    addAlbumToQueue(id: number) {
-        this.apiService.getAlbum(id).subscribe(
-            album => {
-                this.ampService.addSongs(album.songs, album.id);
-            }
-        );
-    }
-
-    playPlaylist(id: number) {
-        // TODO
     }
 
 }

@@ -12,11 +12,13 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { UsersComponent } from './user/users/users.component';
 import { MessagesViewComponent } from './messages/messages-view/messages-view.component';
 import { SongComponent } from './song/song.component';
+import { HomeComponent } from './home/home.component';
+import { PlaylistsModalComponent } from './playlists-modal/playlists-modal.component';
 
 
 
 const routes: Routes = [
-    { path: '', component: AlbumCollectionComponent },
+    { path: '', component: HomeComponent },
     { path: 'album/new', component: NewAlbumComponent, canActivate: [AuthGuard]},
     { path: 'album/:id', component: AlbumComponent },
     { path: 'playlist/:id', component: PlaylistComponent },
@@ -28,6 +30,7 @@ const routes: Routes = [
     { path: 'admin/users', component: UsersComponent },
     { path: 'songs/new', component: NewSongComponent, canActivate: [AuthGuard]},
     { path: 'songs/:id', component: SongComponent},
+    { path: 'test', component: PlaylistsModalComponent }
 ];
 
 @NgModule({

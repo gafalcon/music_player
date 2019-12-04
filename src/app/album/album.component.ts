@@ -8,6 +8,7 @@ import { Album } from '../models/album';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
 import { NotificationsService } from 'angular2-notifications';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-album',
@@ -16,6 +17,7 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class AlbumComponent implements OnInit {
 
+    faPlus = faPlus;
     album = new Album(1, '', '', '', '', [], '');
     comments = [];
     currentUser: User;
@@ -65,7 +67,7 @@ export class AlbumComponent implements OnInit {
 
 
     addPlaylistToQueue() {
-        this.amplitude.addSongs(this.album.songs);
+        this.amplitude.addSongs(this.album.songs, this.album.id);
     }
 
     createComment(comment: string) {

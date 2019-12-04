@@ -580,3 +580,7 @@ body div.container-fluid div.right {
     opacity: 0; } }
 
 /*# sourceMappingURL=app.css.map */
+
+.carousel-dots {
+    display: none !important;
+}

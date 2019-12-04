@@ -1,1 +1,85 @@
-<p>song works!</p>
+<div class="container" *ngIf="song">
+    <div class="playlist-description row">
+        <img class="col-sm" src="{{ song.cover_art_url }}">
+        <div class="col-sm" >
+            <h3>
+                {{ song.name }}
+            </h3>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for="">Artist</label>
+                </div>
+                <div class="col-md-6">
+                    {{ song.artist }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for="">Album</label>
+                </div>
+                <div class="col-md-6">
+                    <a href="" routerLink="/album/{{ song.albumId }}">{{ song.album }}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for="">Genres</label>
+                </div>
+                <div class="col-md-6">
+                    {{ song.genres }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for=""># Likes</label>
+                </div>
+                <div class="col-md-6">
+                    {{ song.totalLikes }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for=""># Dislikes</label>
+                </div>
+                <div class="col-md-6">
+                    {{ song.totalDislikes }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for=""># Reproductions</label>
+                </div>
+                <div class="col-md-6">
+                    {{ song.totalReproductions }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for="">Lyrics</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col lyrics overflow-auto">
+                    {{ song.lyrics }}
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="playSong()">
+                Play Song <fa-icon [icon]="faPlay"></fa-icon>
+            </button>
+            <button class="btn btn-primary" style="margin-left: 5px" (click)="addToPlaylist()" *ngIf="currentUser">
+                Add To Playlist <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+        </div>
+    </div>
+    <br />
+    <app-likes [model]="song" [modelType]="'songs'" (likeEvent)="likeEvent($event)" [liked]="liked" [disliked]="disliked"></app-likes>
+    <br />
+    <div class="row">
+        <div class="col">
+            <app-comments [comments]="comments"
+                          (postComment)="createComment($event)"
+                          [enablePost]="currentUser"
+            ></app-comments>
+        </div>
+    </div>
+</div>

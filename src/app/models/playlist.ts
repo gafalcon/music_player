@@ -4,7 +4,9 @@ export class Playlist {
     constructor(
         public id: number,
         public name: string,
-        public coverArtUrl: string,
-        public songs: Array<Song> ) {
+        public cover_art_url: string,
+        public songs: Array<Song>,
+        public createdBy?: number
+    ) {
     }
 }

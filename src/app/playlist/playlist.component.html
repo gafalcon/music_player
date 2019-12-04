@@ -1,16 +1,24 @@
-<div class="container">
+<div class="container" *ngIf="playlist">
     <div class="playlist-description row">
-        <img class="col-sm" src="{{ playlist.coverArtUrl }}">
+        <img class="col-sm" src="{{ playlist.cover_art_url }}">
         <div class="col-sm" >
             <h3>
                 {{ playlist.name }}
             </h3>
-            <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">Add To Queue</button>
+            <div class="row">
+                <div class="label col-md-4">
+                    <label for="">Created At</label>
+                </div>
+                <div class="col-md-6">
+                    {{ playlist.createdAt | date }}
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">
+                Add To Queue <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
         </div>
     </div>
     <br />
-    <app-likes></app-likes>
-    <app-song-list [songs]="playlist.songs"></app-song-list>
+    <app-song-list [songs]="playlist.songs" [isLoggedIn]="currentUser"></app-song-list>
     <br />
-    <app-comments></app-comments>
 </div>
