@@ -14,6 +14,7 @@ import { MessagesViewComponent } from './messages/messages-view/messages-view.co
 import { SongComponent } from './song/song.component';
 import { HomeComponent } from './home/home.component';
 import { PlaylistsModalComponent } from './playlists-modal/playlists-modal.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -30,7 +31,7 @@ const routes: Routes = [
     { path: 'admin/users', component: UsersComponent },
     { path: 'songs/new', component: NewSongComponent, canActivate: [AuthGuard]},
     { path: 'songs/:id', component: SongComponent},
-    { path: 'test', component: PlaylistsModalComponent }
+    { path: 'test', component: SearchComponent }
 ];
 
 @NgModule({

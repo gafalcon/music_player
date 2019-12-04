@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, forkJoin } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Song } from '../models/song';
 import { Playlist } from '../models/playlist';
@@ -10,6 +10,7 @@ import { User } from '../models/user';
 import { UserStatus } from '../models/status';
 import { Comment } from '../models/comment';
 import { Message } from '../models/message';
+import { mergeMap, tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,64 +18,6 @@ import { Message } from '../models/message';
 export class ApiService {
 
     private apiURL = `${environment.apiUrl}/api`;
-    songs: Array<Song> = [
-        {
-            id: 1,
-            name: 'Risin\' High (feat Raashan Ahmad)',
-            artist: 'Ancient Astronauts',
-            album: 'We Are to Answer',
-            url: 'https://521dimensions.com/song/Ancient Astronauts - Risin\' High (feat Raashan Ahmad).mp3',
-            cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg'
-
-            ,totalLikes: 0,
-            totalDislikes: 0,
-            totalReproductions:0
-        },
-        {
-            id: 2,
-            name: 'The Gun',
-            artist: 'Lorn',
-            album: 'Ask The Dust',
-            url: 'https://521dimensions.com/song/08 The Gun.mp3',
-            cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/ask-the-dust.jpg'
-            ,totalLikes: 0,
-            totalDislikes: 0,
-            totalReproductions:0
-        },
-        {
-            id: 3,
-            name: 'Anvil',
-            artist: 'Lorn',
-            album: 'Anvil',
-            url: 'https://521dimensions.com/song/LORN - ANVIL.mp3',
-            cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/anvil.jpg'
-            ,totalLikes: 0,
-            totalDislikes: 0,
-            totalReproductions:0
-        },
-        {
-            id: 4,
-            name: 'I Came Running',
-            artist: 'Ancient Astronauts',
-            album: 'We Are to Answer',
-            url: 'https://521dimensions.com/song/ICameRunning-AncientAstronauts.mp3',
-            cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg'
-            ,totalLikes: 0,
-            totalDislikes: 0,
-            totalReproductions:0
-        },
-        {
-            id: 5,
-            name: 'First Snow',
-            artist: 'Emancipator',
-            album: 'Soon It Will Be Cold Enough',
-            url: 'https://521dimensions.com/song/FirstSnow-Emancipator.mp3',
-            cover_art_url: 'https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg'
-            ,totalLikes: 0,
-            totalDislikes: 0,
-            totalReproductions:0
-        }
-    ];
     constructor(private http: HttpClient) { }
 
     getPlaylists(): Observable<Array<object>> {
@@ -130,10 +73,6 @@ export class ApiService {
 
     getPlaylistsByUser(userId: number): Observable<Array<Playlist>> {
         return this.http.get<Array<Playlist>>(`${this.apiURL}/playlists/user/${userId}`);
-    }
-
-    getCurrentPlaylist(): Observable<Array<Song>> {
-        return of(this.songs);
     }
 
     deletePlaylist(playlistId: number) {
@@ -236,12 +175,36 @@ export class ApiService {
         const received = this.getReceivedMessages();
         return forkJoin([sent, received]);
     }
-    // getConversations() {
-
-    // }
 
     // Genres
     getGenres() {
         return this.http.get(`${this.apiURL}/genres`);
+    }
+
+    // Search
+    findByName(modelType: string, name: string) {
+        return this.http.get(`${this.apiURL}/${modelType}/search/name/${name}`);
+    }
+
+    findAlbumsByGenre(genre: string) {
+        return this.http.get(`${this.apiURL}/albums/search/genre/${genre}`);
+    }
+
+    findAll(query: string) {
+        const albums = this.findByName('albums', query);
+        const songs = this.findByName('songs', query);
+        const pls = this.findByName('playlists', query);
+        const genres = this.findAlbumsByGenre(query);
+        return forkJoin([albums, songs, pls, genres]).pipe(
+            map((results: any) => {
+                console.log(results);
+                results[0].forEach(res => res.model = 'album');
+                results[1].forEach(res => res.model = 'song');
+                results[2].forEach(res => res.model = 'playlist');
+                results[3].forEach(res => res.model = 'album genre');
+                results = results.flat();
+                return results;
+            })
+        );
     }
 }

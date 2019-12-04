@@ -14,7 +14,7 @@
               Upload
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="" routerLink="songs/new">Upload Song</a>
+              <!-- <a class="dropdown-item" href="" routerLink="songs/new">Upload Song</a> -->
               <a class="dropdown-item" href="" routerLink="album/new">New Album</a>
           </div>
       </li>
@@ -22,10 +22,8 @@
           <a class="nav-link" href="" routerLink="/admin/users">Admin</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
+    <app-search></app-search>
 
     <ul class="navbar-nav left-nav" *ngIf="!currentUser ; else user">
         <li class="nav-item">

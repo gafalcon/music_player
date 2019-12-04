@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as Amplitude from 'amplitudejs';
-import { ApiService } from './api.service';
 import { Song } from '../models/song';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../environments/environment';
@@ -14,31 +13,27 @@ export class AmplitudeService {
     private apiURL = `${environment.apiUrl}/api`;
 
     constructor(
-        private api: ApiService,
         private notifier: NotificationsService,
         private http: HttpClient
-    ) { }
+    ) {
+       this.currentSongs = this.recoverPlayQueue();
+    }
 
-    currentSongs: Array<Song>;
+    currentSongs: Array<Song> = [];
     startAmplitude() {
-        this.api.getCurrentPlaylist().subscribe(
-            songs => {
-                this.currentSongs = songs;
-                Amplitude.init({
-                    songs: this.currentSongs,
-                    default_album_art: 'http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png',
-                    callbacks: {
-                        song_change: () => {
-                            this.notifier.success('Playing: ' + Amplitude.getActiveSongMetadata().name);
-                        },
-                        ended: () => {
-                            console.log('Ended' + Amplitude.getActiveSongMetadata().name);
-                            this.postSongReproduced(Amplitude.getActiveSongMetadata().id);
-                        }
-                    }
-                });
+        Amplitude.init({
+            songs: this.currentSongs,
+            default_album_art: 'http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png',
+            callbacks: {
+                song_change: () => {
+                    this.notifier.success('Playing: ' + Amplitude.getActiveSongMetadata().name);
+                },
+                ended: () => {
+                    console.log('Ended' + Amplitude.getActiveSongMetadata().name);
+                    this.postSongReproduced(Amplitude.getActiveSongMetadata().id);
+                }
             }
-        );
+        });
     }
 
     postSongReproduced(songId: number) {
@@ -54,6 +49,7 @@ export class AmplitudeService {
         // this.currentSongs.push(song);
         Amplitude.bindNewElements();
         this.notifier.success(song.name + ' added to Queue');
+        this.savePlayQueue();
     }
 
     addSongs(songs: Array<Song>, albumId?: number) {
@@ -63,6 +59,7 @@ export class AmplitudeService {
         if (albumId) {
             this.postAlbumReproduced(albumId);
         }
+        this.savePlayQueue();
     }
 
     playNow(song: Song) {
@@ -77,5 +74,26 @@ export class AmplitudeService {
     removeSong(songIndex: number) {
         Amplitude.removeSong(songIndex);
         Amplitude.bindNewElements();
+        this.savePlayQueue();
+    }
+
+    playCollection(collection: Array<Song>, albumId?: number) {
+        this.currentSongs = collection;
+        Amplitude.bindNewElements();
+        this.playSongAtIndex(0);
+        if (albumId) {
+            this.postAlbumReproduced(albumId);
+        }
+        this.savePlayQueue();
+    }
+
+    savePlayQueue() {
+        localStorage.setItem('playQueue', JSON.stringify(this.currentSongs));
+    }
+
+    recoverPlayQueue() {
+        const playQueue = JSON.parse(localStorage.getItem('playQueue'));
+        console.log('playQueue');
+        return playQueue ? playQueue : [];
     }
 }

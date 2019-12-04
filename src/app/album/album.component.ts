@@ -8,7 +8,7 @@ import { Album } from '../models/album';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
 import { NotificationsService } from 'angular2-notifications';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-album',
@@ -17,6 +17,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class AlbumComponent implements OnInit {
 
+    faPlay = faPlay;
     faPlus = faPlus;
     album = new Album(1, '', '', '', '', [], '');
     comments = [];
@@ -81,5 +82,11 @@ export class AlbumComponent implements OnInit {
 
     likeEvent(event: string) {
         this.notifier.success(event);
+    }
+
+
+    playAlbum() {
+        this.album.totalReproductions += 1;
+        this.amplitude.playCollection(this.album.songs, this.album.id);
     }
 }

@@ -12,6 +12,9 @@ export class AlbumCollectionComponent implements OnInit {
     @Input() title = 'Collection';
     @Input() collectionType = 'album';
     @Output() addToQueue = new EventEmitter<any>();
+    @Output() addToPlaylist = new EventEmitter<any>();
+    @Output() playCollection = new EventEmitter<any>();
+
     dots = 'carousel-dots';
     faPlay = faPlay;
     constructor() {}

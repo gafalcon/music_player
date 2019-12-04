@@ -13,7 +13,10 @@
                     {{ playlist.createdAt | date }}
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" (click)="addPlaylistToQueue()">
+            <button type="button" class="btn btn-primary" (click)="playPlaylist()">
+                Play <fa-icon [icon]="faPlay"></fa-icon>
+            </button>
+            <button type="button" style="margin-left: 5px" class="btn btn-primary" (click)="addPlaylistToQueue()">
                 Add To Queue <fa-icon [icon]="faPlus"></fa-icon>
             </button>
         </div>

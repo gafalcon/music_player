@@ -43,6 +43,7 @@ import { MessagesViewComponent } from './messages/messages-view/messages-view.co
 import { SongComponent } from './song/song.component';
 import { HomeComponent } from './home/home.component';
 import { PlaylistsModalComponent } from './playlists-modal/playlists-modal.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { PlaylistsModalComponent } from './playlists-modal/playlists-modal.compo
     MessagesViewComponent,
     SongComponent,
     HomeComponent,
-    PlaylistsModalComponent
+    PlaylistsModalComponent,
+    SearchComponent
   ],
   imports: [
       BrowserModule,

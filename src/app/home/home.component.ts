@@ -57,4 +57,12 @@ export class HomeComponent implements OnInit {
         // TODO
     }
 
+    addToPlaylist(album: Album) {
+        // TODO
+    }
+
+    playAlbum(album: Album) {
+        console.log("play album");
+        this.ampService.playCollection(album.songs, album.id);
+    }
 }

@@ -6,7 +6,7 @@ import { ApiService } from '../services/api.service';
 import { AmplitudeService } from '../services/amplitude.service';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-playlist',
@@ -15,6 +15,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class PlaylistComponent implements OnInit {
 
+    faPlay = faPlay;
     faPlus = faPlus;
     playlist: Playlist;
     currentUser: User;
@@ -41,6 +42,10 @@ export class PlaylistComponent implements OnInit {
 
     addPlaylistToQueue() {
         this.amplitude.addSongs(this.playlist.songs);
+    }
+
+    playPlaylist() {
+        this.amplitude.playCollection(this.playlist.songs);
     }
 
 }
