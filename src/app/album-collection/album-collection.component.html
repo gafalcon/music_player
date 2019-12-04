@@ -1,6 +1,6 @@
 <div *ngIf="collection?.length">
     <h4>{{ title }}</h4>
-    <p-carousel [value]="collection" [numVisible]="4" [numScroll]="1" [dotsContainerClass]="dots">
+    <p-carousel [value]="collection" [numVisible]="collection.length > 3 ? 4 : collection.length" [numScroll]="1" [dotsContainerClass]="dots">
         <ng-template let-album pTemplate="item">
             <div class="song-to-add">
                 <a href="" [routerLink]="[collectionType, album.id]">

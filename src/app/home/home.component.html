@@ -1,5 +1,5 @@
 <br />
-<app-album-collection [collection]="recentlyPlayedAlbums"
+<app-album-collection *ngIf="recentlyPlayedAlbums.length > 0" [collection]="recentlyPlayedAlbums"
                       title="Recently Played Albums"
                       (addToQueue)="addAlbumToQueue($event)"
                       (playCollection)="playAlbum($event)">

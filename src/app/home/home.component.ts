@@ -29,11 +29,6 @@ export class HomeComponent implements OnInit {
         this.apiService.getPlaylists().subscribe(
             playlists => this.playlists = playlists
         );
-        // this.apiService.getAlbums().subscribe(
-        //     albums => {
-        //         this.albums = albums;
-        //     }
-        // );
         this.apiService.getMostLikedAlbums().subscribe( albums => this.mostLikedAlbums = albums);
         this.apiService.getMostReproducedAlbums().subscribe(albums => {
             this.mostPlayedAlbums = albums;
@@ -44,8 +39,13 @@ export class HomeComponent implements OnInit {
         this.apiService.getRecentAlbums().subscribe(albums => this.recentAlbums = albums);
         this.auth.currentUser.subscribe(user => {
             this.currentUser = user;
-            if (user)
-                this.apiService.getRecentlyPlayedAlbums().subscribe(albums => this.recentlyPlayedAlbums = albums);
+            if (user) {
+                this.apiService.getRecentlyPlayedAlbums().subscribe(albums => {
+                    this.recentlyPlayedAlbums = albums;
+                    console.log("recently played");
+                    console.log(this.recentlyPlayedAlbums);
+                });
+            }
         });
     }
 
