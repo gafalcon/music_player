@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Album } from '../models/album';
 import { AmplitudeService } from '../services/amplitude.service';
 import { ApiService } from '../services/api.service';
+import { User } from '../models/user';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +18,12 @@ export class HomeComponent implements OnInit {
     mostLikedAlbums: Array<Album> = [];
     recentAlbums: Array<Album> = [];
     recentlyPlayedAlbums: Array<Album> = [];
+    currentUser: User;
 
-    constructor(private ampService: AmplitudeService, private apiService: ApiService) { }
+    constructor(private ampService: AmplitudeService,
+                private apiService: ApiService,
+                private auth: AuthService
+               ) { }
 
     ngOnInit() {
         this.apiService.getPlaylists().subscribe(
@@ -34,8 +40,13 @@ export class HomeComponent implements OnInit {
             console.log("most reproduced");
             console.log(this.mostPlayedAlbums);
         });
-        this.apiService.getRecentlyPlayedAlbums().subscribe(albums => this.recentlyPlayedAlbums = albums);
+
         this.apiService.getRecentAlbums().subscribe(albums => this.recentAlbums = albums);
+        this.auth.currentUser.subscribe(user => {
+            this.currentUser = user;
+            if (user)
+                this.apiService.getRecentlyPlayedAlbums().subscribe(albums => this.recentlyPlayedAlbums = albums);
+        });
     }
 
     addPlaylistToQueue(id: number) {

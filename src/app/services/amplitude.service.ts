@@ -4,6 +4,8 @@ import { Song } from '../models/song';
 import { NotificationsService } from 'angular2-notifications';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +13,19 @@ import { HttpClient } from '@angular/common/http';
 export class AmplitudeService {
 
     private apiURL = `${environment.apiUrl}/api`;
-
+    currentUser: User;
     constructor(
         private notifier: NotificationsService,
-        private http: HttpClient
+        private http: HttpClient,
+        private auth: AuthService
     ) {
        this.currentSongs = this.recoverPlayQueue();
     }
 
     currentSongs: Array<Song> = [];
     startAmplitude() {
+
+        this.auth.currentUser.subscribe(user => { this.currentUser = user; });
         Amplitude.init({
             songs: this.currentSongs,
             default_album_art: 'http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png',
@@ -37,11 +42,13 @@ export class AmplitudeService {
     }
 
     postSongReproduced(songId: number) {
-        this.http.post(`${this.apiURL}/songs/${songId}/repr`, null).subscribe(res => console.log(res));
+        if (this.currentUser)
+            this.http.post(`${this.apiURL}/songs/${songId}/repr`, null).subscribe(res => console.log(res));
     }
 
     postAlbumReproduced(albumId: number) {
-        this.http.post(`${this.apiURL}/albums/${albumId}/repr`, null).subscribe(res => console.log(res));
+        if (this.currentUser)
+            this.http.post(`${this.apiURL}/albums/${albumId}/repr`, null).subscribe(res => console.log(res));
     }
 
     addSong(song: Song) {
@@ -78,13 +85,20 @@ export class AmplitudeService {
     }
 
     playCollection(collection: Array<Song>, albumId?: number) {
-        this.currentSongs = collection;
-        Amplitude.bindNewElements();
+
+        Amplitude.pause();
+        this.currentSongs.forEach((val, i) => {
+            Amplitude.removeSong(i);
+            Amplitude.bindNewElements();
+        });
+        this.addSongs(collection, albumId);
+        // this.currentSongs = collection;
+        // Amplitude.bindNewElements();
         this.playSongAtIndex(0);
-        if (albumId) {
-            this.postAlbumReproduced(albumId);
-        }
-        this.savePlayQueue();
+        // if (albumId) {
+        //     this.postAlbumReproduced(albumId);
+        // }
+        // this.savePlayQueue();
     }
 
     savePlayQueue() {

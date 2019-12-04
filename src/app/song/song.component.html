@@ -72,7 +72,8 @@
         </div>
     </div>
     <br />
-    <app-likes [model]="song" [modelType]="'songs'" (likeEvent)="likeEvent($event)" [liked]="liked" [disliked]="disliked"></app-likes>
+    <app-likes  *ngIf="enableLikes" [model]="song" [enabled]="enableLikes"
+               [modelType]="'songs'" (likeEvent)="likeEvent($event)" [liked]="liked" [disliked]="disliked"></app-likes>
     <br />
     <div class="row">
         <div class="col">

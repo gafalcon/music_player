@@ -8,6 +8,7 @@ export class Message {
         public message: string,
         public createdAt: string,
         public status: string,
-        public senderPhoto: string
+        public senderPhoto: string,
+        public receiverPhoto: string
     ) {}
 }

@@ -25,6 +25,7 @@ export class SongComponent implements OnInit {
     currentUser: User;
     liked = false;
     disliked = false;
+    enableLikes = false;
 
     constructor(
         private route: ActivatedRoute,
@@ -36,15 +37,29 @@ export class SongComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.getData();
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.getData(id);
         this.auth.currentUser.subscribe((user) => {
             this.currentUser = user;
             console.log(this.currentUser);
+            if (this.currentUser) {
+                this.enableLikes = true;
+                this.api.isLikedDisliked(id, 'songs').subscribe((res: any) => {
+                    console.log('likes');
+                    console.log(res);
+                    if (res.success) {
+                        if (res.message === 'liked') {
+                            this.liked = true;
+                        } else {
+                            this.disliked = true;
+                        }
+                    }
+                });
+            }
         });
     }
 
-    getData() {
-        const id = +this.route.snapshot.paramMap.get('id');
+    getData(id:number) {
         this.api.getSong(id)
             .subscribe(song => {
                 this.song = song;
@@ -55,17 +70,6 @@ export class SongComponent implements OnInit {
             console.log(comments);
         });
 
-        this.api.isLikedDisliked(id, 'songs').subscribe((res: any) => {
-            console.log('likes');
-            console.log(res);
-            if (res.success) {
-                if (res.message === 'liked') {
-                    this.liked = true;
-                } else {
-                    this.disliked = true;
-                }
-            }
-        });
     }
 
 

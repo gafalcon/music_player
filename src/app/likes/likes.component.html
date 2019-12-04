@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col">
-        <span>{{ model.totalLikes }} likes</span>
-        <button class="btn btn-small" [ngClass]="liked? 'btn-primary' : 'btn-outline-primary'" type="button" (click)="likeClick()">
+        <span>{{ model.totalLikes }} likes </span>
+        <button *ngIf="enabled"  class="btn btn-small" [ngClass]="liked? 'btn-primary' : 'btn-outline-primary'" type="button" (click)="likeClick()">
             <span class="oi oi-thumb-up" title="plus" aria-hidden="true"></span>
         </button>
         <span>{{ model.totalDislikes }} dislikes</span>
-        <button class="btn btn-small" [ngClass]="disliked? 'btn-primary' : 'btn-outline-primary'" type="button" (click)="dislikeClick()">
+        <button *ngIf="enabled" class="btn btn-small" [ngClass]="disliked? 'btn-primary' : 'btn-outline-primary'" type="button" (click)="dislikeClick()">
             <span class="oi oi-thumb-down" title="plus" aria-hidden="true"></span>
         </button>
     </div>

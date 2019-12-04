@@ -13,6 +13,7 @@ export class LikesComponent implements OnInit {
     @Output() likeEvent = new EventEmitter<string>();
     @Input() liked = false;
     @Input() disliked = false;
+    @Input() enabled = false;
 
     constructor(private api: ApiService) { }
 
@@ -21,6 +22,9 @@ export class LikesComponent implements OnInit {
     }
 
     likeClick() {
+        if (!this.enabled) {
+            return;
+        }
         if (!this.liked) {
             this.api.postLike(this.model.id, this.modelType, 'like').subscribe((res: any) => {
                 console.log(res);
@@ -43,6 +47,9 @@ export class LikesComponent implements OnInit {
     }
 
     dislikeClick() {
+        if (!this.enabled) {
+            return;
+        }
         if (!this.liked) {
             this.model.totalDislikes += 1;
             this.api.postLike(this.model.id, this.modelType, 'dislike').subscribe((res: any) => {

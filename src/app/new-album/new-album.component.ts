@@ -67,7 +67,6 @@ export class NewAlbumComponent implements OnInit {
         console.log(this.form.value);
         this.form.value.genres = this.form.value.genres.join();
         console.log(this.form.value);
-        return;
         this.wasValidated = true;
         if (this.form.status !== 'VALID') {
             this.notifier.error('There are errors in your form');

@@ -36,10 +36,11 @@ export class MessagesViewComponent implements OnInit {
 
     getConversations(msgs: Array<Message>) {
         const conversations = msgs.map((msg: Message) => {
-            const conversation = {userPhoto: msg.senderPhoto, user: msg.receiver, userId: msg.receiver_id, messages: [] };
+            const conversation = {userPhoto: msg.receiverPhoto, user: msg.receiver, userId: msg.receiver_id, messages: [] };
             if (msg.sender_id !== this.currentUser.id) {
                 conversation.user = msg.sender;
                 conversation.userId = msg.sender_id;
+                conversation.userPhoto = msg.senderPhoto;
             }
             return conversation;
         });
