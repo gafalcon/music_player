@@ -15,6 +15,7 @@ import { SongComponent } from './song/song.component';
 import { HomeComponent } from './home/home.component';
 import { PlaylistsModalComponent } from './playlists-modal/playlists-modal.component';
 import { SearchComponent } from './search/search.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 
 
@@ -31,7 +32,8 @@ const routes: Routes = [
     { path: 'admin/users', component: UsersComponent },
     { path: 'songs/new', component: NewSongComponent, canActivate: [AuthGuard]},
     { path: 'songs/:id', component: SongComponent},
-    { path: 'test', component: SearchComponent }
+    { path: 'test', component: SearchComponent },
+    { path: 'search', component: SearchPageComponent }
 ];
 
 @NgModule({

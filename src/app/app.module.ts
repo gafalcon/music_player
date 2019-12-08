@@ -44,6 +44,7 @@ import { SongComponent } from './song/song.component';
 import { HomeComponent } from './home/home.component';
 import { PlaylistsModalComponent } from './playlists-modal/playlists-modal.component';
 import { SearchComponent } from './search/search.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { SearchComponent } from './search/search.component';
     SongComponent,
     HomeComponent,
     PlaylistsModalComponent,
-    SearchComponent
+    SearchComponent,
+    SearchPageComponent
   ],
   imports: [
       BrowserModule,

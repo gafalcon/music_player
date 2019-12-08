@@ -13,7 +13,7 @@
                     <div class="clearfix"></div>
                     <hr>
                     <ul class="media-list">
-                        <li class="media" *ngFor="let comment of comments">
+                        <li class="media" *ngFor="let comment of comments.reverse()">
                             <a href="#" class="pull-left">
                                 <img src="{{ comment.userPhoto }}" alt="" class="img-circle">
                             </a>
@@ -21,7 +21,7 @@
                                 <span class="text-muted pull-right">
                                     <small class="text-muted">{{ comment.createdAt  | date }}</small>
                                 </span>
-                                <strong class="text-success">{{ comment.username }}</strong>
+                                <strong class="text-success"> {{ comment.username }}</strong>
                                 <p>
                                     {{ comment.comment }}
                                 </p>

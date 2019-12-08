@@ -4,11 +4,13 @@
                       (addToQueue)="addAlbumToQueue($event)"
                       (playCollection)="playAlbum($event)">
 </app-album-collection>
-<app-album-collection [collection]="mostLikedAlbums"
-                      title="Most Liked Albums"
-                      (addToQueue)="addAlbumToQueue($event)"
-                      (playCollection)="playAlbum($event)">
-</app-album-collection>
+<div class="mostLiked">
+  <app-album-collection [collection]="mostLikedAlbums"
+                        title="Most Liked Albums"
+                        (addToQueue)="addAlbumToQueue($event)"
+                        (playCollection)="playAlbum($event)">
+  </app-album-collection>
+</div>
 <app-album-collection [collection]="mostPlayedAlbums"
                       title="Most Played Albums"
                       (addToQueue)="addAlbumToQueue($event)"

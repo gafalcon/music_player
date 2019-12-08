@@ -56,6 +56,9 @@ export class SearchComponent implements OnInit {
     }
 
     submit() {
-        console.log(this.selectedSearch);
+      console.log(this.selectedSearch);
+      if (this.selectedSearch != undefined) {
+        this.router.navigateByUrl('/search')
+      }
     }
 }
