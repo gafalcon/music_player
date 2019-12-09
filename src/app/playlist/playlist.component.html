@@ -3,7 +3,7 @@
         <img class="col-sm" src="{{ playlist.cover_art_url }}">
         <div class="col-sm" >
             <h3>
-                {{ playlist.name }}
+                {{ playlist.name }}  <small><a routerLink="/users/{{ playlist.createdBy }}">View author</a></small>
             </h3>
             <div class="row">
                 <div class="label col-md-4">

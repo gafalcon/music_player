@@ -5,11 +5,9 @@
             <button class="btn btn-primary btn-sm btn-action" (click)="editUser()" *ngIf="isCurrentUser(); else msg_button">
                 Edit Info <fa-icon [icon]="faEdit"></fa-icon>
             </button>
-            <ng-template #msg_button>
-                <button class="btn btn-primary btn-sm btn-action" (click)="sendMessage()">
-                    Message <fa-icon [icon]="faMessage"></fa-icon>
-                </button>
-            </ng-template>
+            <button class="btn btn-primary btn-sm btn-action" (click)="sendMessage()" *ngIf="currentUser && !isCurrentUser()">
+                Message <fa-icon [icon]="faMessage"></fa-icon>
+            </button>
             <span *ngIf="isAdmin()">
                 <button class="btn btn-warning btn-sm btn-action" (click)="changeRole()">
                     Change Role <fa-icon [icon]="faUserRole"></fa-icon>
@@ -58,7 +56,7 @@
                         </div>
                     </ng-template>
                 </ngb-tab>
-                <ngb-tab title="Messages">
+                <ngb-tab title="Messages" *ngIf="isCurrentUser()">
                     <ng-template ngbTabContent>
                         <div class="ngtab-content">
                             <h3>Messages</h3>
