@@ -31,7 +31,8 @@ export class AmplitudeService {
             default_album_art: 'http://cdn.last.fm/flatness/responsive/2/noimage/default_album_300_g4.png',
             callbacks: {
                 song_change: () => {
-                    this.notifier.success('Playing: ' + Amplitude.getActiveSongMetadata().name);
+                    if (Amplitude.getPlayerState() === 'playing')
+                        this.notifier.success('Playing: ' + Amplitude.getActiveSongMetadata().name);
                 },
                 ended: () => {
                     console.log('Ended' + Amplitude.getActiveSongMetadata().name);
@@ -79,26 +80,22 @@ export class AmplitudeService {
     }
 
     removeSong(songIndex: number) {
+
         Amplitude.removeSong(songIndex);
         Amplitude.bindNewElements();
-        this.savePlayQueue();
     }
 
     playCollection(collection: Array<Song>, albumId?: number) {
-
         Amplitude.pause();
-        this.currentSongs.forEach((val, i) => {
-            Amplitude.removeSong(i);
+        const length = Amplitude.getSongs().length;
+        for (let i  = 0; i < length; ++i) {
+            Amplitude.removeSong(0);
             Amplitude.bindNewElements();
-        });
+        }
         this.addSongs(collection, albumId);
-        // this.currentSongs = collection;
-        // Amplitude.bindNewElements();
+
+        Amplitude.next();
         this.playSongAtIndex(0);
-        // if (albumId) {
-        //     this.postAlbumReproduced(albumId);
-        // }
-        // this.savePlayQueue();
     }
 
     savePlayQueue() {
