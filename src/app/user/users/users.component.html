@@ -14,6 +14,35 @@
     <!-- </form> -->
     <!-- </div> -->
     <!-- </div> -->
+
+    <div class="row" *ngIf="requests.length">
+        <div class="col">
+            <div class="row"><h3>Professional User Requests</h3></div>
+            <div class="row">
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let request of requests; index as i">
+                            <th scope="row">
+                                <a routerLink="/users/{{ request.user_id }}">
+                                    {{ request.username }}
+                                </a>
+                            </th>
+                            <td>{{ request.createdAt | date }}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm" style="margin-right: 5px;" (click)="answerRequest(request, i, true)">
+                                    Accept <fa-icon [icon]="faCheck"></fa-icon>
+                                </button>
+
+                                <button class="btn btn-danger btn-sm" (click)="answerRequest(request,i, false)">
+                                    Deny <fa-icon [icon]="faTimes"></fa-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <br />
     <div class="row">
         <div class="col">

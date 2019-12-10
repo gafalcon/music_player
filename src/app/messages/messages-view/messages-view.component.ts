@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Message } from 'src/app/models/message';
 import { User } from 'src/app/models/user';
@@ -16,6 +16,7 @@ export class MessagesViewComponent implements OnInit {
     currentUser: User;
     selectedConversation: number;
     newMessage: string;
+    @Input() showTitle = true;
     constructor(
         private api: ApiService,
         private auth: AuthService,

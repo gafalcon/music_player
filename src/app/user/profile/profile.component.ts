@@ -84,6 +84,10 @@ export class ProfileComponent implements OnInit {
         return  this.currentUser && this.currentUser.role === Role.Admin;
     }
 
+    isRegularUser() {
+        return this.currentUser && this.currentUser.role === Role.User;
+    }
+
     isCurrentUser() {
         return this.currentUser && this.user && this.user.id === this.currentUser.id;
     }
@@ -195,5 +199,21 @@ export class ProfileComponent implements OnInit {
             },
             (reason) => console.log(reason)
         );
+    }
+
+
+    requestAgent() {
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.title = 'Become Professiona!';
+        modalRef.componentInstance.body = 'A request will be sent to the administrator to upgrade your role to Professional';
+        modalRef.componentInstance.okMsg = 'Send Request';
+        modalRef.result.then((res: any) => {
+            if (res === 'Ok') {
+                this.api.proRequest().subscribe((result) => {
+                    console.log(result);
+                    this.notifier.success('Request sent');
+                });
+            }
+        });
     }
 }

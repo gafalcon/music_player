@@ -2,8 +2,11 @@
     <app-user-info [user]="user"></app-user-info>
     <div class="row">
         <div id="actions" class="col">
-            <button class="btn btn-primary btn-sm btn-action" (click)="editUser()" *ngIf="isCurrentUser(); else msg_button">
+            <button class="btn btn-primary btn-sm btn-action" (click)="editUser()" *ngIf="isCurrentUser()">
                 Edit Info <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button class="btn btn-primary btn-sm btn-action" (click)="requestAgent()" *ngIf="isRegularUser()">
+                Become Pro! <fa-icon [icon]="faUserRole"></fa-icon>
             </button>
             <button class="btn btn-primary btn-sm btn-action" (click)="sendMessage()" *ngIf="currentUser && !isCurrentUser()">
                 Message <fa-icon [icon]="faMessage"></fa-icon>
@@ -60,7 +63,7 @@
                     <ng-template ngbTabContent>
                         <div class="ngtab-content">
                             <h3>Messages</h3>
-                            <app-messages-view></app-messages-view>
+                            <app-messages-view [showTitle]="false"></app-messages-view>
                         </div>
                     </ng-template>
                 </ngb-tab>

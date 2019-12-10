@@ -30,6 +30,7 @@ export class ApiService {
     }
 
     getRecentlyPlayedAlbums(): Observable<Array<Album>> {
+        console.log("Get recently played!!!!!")
         return this.http.get<Array<Album>>(`${this.apiURL}/albums/reprs/recent`);
     }
 
@@ -127,6 +128,18 @@ export class ApiService {
         return this.http.get<Array<User>>(`${this.apiURL}/users`);
     }
 
+    proRequest() {
+        return this.http.post(`${this.apiURL}/users/role_request`, null);
+    }
+
+    getRequests() {
+        return this.http.get(`${this.apiURL}/users/role_request`);
+    }
+
+    deleteRequest(requestId: number) {
+        return this.http.delete(`${this.apiURL}/users/role_request/${requestId}`);
+    }
+
     // Comments
     getAlbumComments(albumId: number) {
         return this.http.get<Array<Comment>>(`${this.apiURL}/albums/${albumId}/comments`);
@@ -206,5 +219,13 @@ export class ApiService {
                 return results;
             })
         );
+    }
+
+    getUnreadNotifications() {
+        return this.http.get(`${this.apiURL}/notifs/unread`);
+    }
+
+    markAllAsRead() {
+        return this.http.put(`${this.apiURL}/notifs/`, null);
     }
 }

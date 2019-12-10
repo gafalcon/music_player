@@ -9,6 +9,8 @@ import { NewMessageComponent } from 'src/app/messages/new-message/new-message.co
 import { AuthService } from 'src/app/services/auth.service';
 import { UserStatus } from 'src/app/models/status';
 import { ModalComponent } from 'src/app/templates/modal/modal.component';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Role } from 'src/app/models/role';
 
 @Component({
   selector: 'app-users',
@@ -17,8 +19,12 @@ import { ModalComponent } from 'src/app/templates/modal/modal.component';
 })
 export class UsersComponent implements OnInit {
 
+    faCheck = faCheck;
+    faTimes = faTimes;
+
     users: Array<User>;
     currentUser: User;
+    requests: Array<any> = [];
     constructor(
         private notifier: NotificationsService,
         private api: ApiService,
@@ -33,6 +39,10 @@ export class UsersComponent implements OnInit {
         }, (error) => console.log(error));
         this.auth.currentUser.subscribe((currentUser) => {
             this.currentUser = currentUser;
+        });
+        this.api.getRequests().subscribe((reqs: Array<any>) => {
+            this.requests = reqs;
+            console.log(reqs);
         });
     }
 
@@ -102,4 +112,27 @@ export class UsersComponent implements OnInit {
         modalRef.componentInstance.okMsg = `${action} User`;
     }
 
+    answerRequest(request: any, i: number, action: boolean) {
+        console.log('answer' + action);
+        if (action) {
+            const modalRef = this.modalService.open(ModalComponent);
+            modalRef.componentInstance.title = 'Answer Travel Request';
+            modalRef.componentInstance.body = `Are you sure you want to make ${request.extra} a travel agent?`;
+            modalRef.componentInstance.okMsg = 'Make Travel Agent';
+            modalRef.result.then((res: any) => {
+                if (res === 'Ok') {
+                    this.api.updateUserRole(request.user_id, Role.Professional).subscribe((result) => {
+                        console.log(result);
+                        this.notifier.success('Changed User Role');
+                        this.requests.splice(i, 1);
+                    });
+                }
+            });
+        } else {
+            this.api.deleteRequest(request.id).subscribe((result) => {
+                this.notifier.warn('Request denied');
+                this.requests.splice(i, 1);
+            });
+        }
+    }
 }

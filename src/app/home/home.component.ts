@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
         this.apiService.getMostLikedAlbums().subscribe( albums => this.mostLikedAlbums = albums);
         this.apiService.getMostReproducedAlbums().subscribe(albums => {
             this.mostPlayedAlbums = albums;
-            console.log("most reproduced");
             console.log(this.mostPlayedAlbums);
         });
 
@@ -42,7 +41,6 @@ export class HomeComponent implements OnInit {
             if (user) {
                 this.apiService.getRecentlyPlayedAlbums().subscribe(albums => {
                     this.recentlyPlayedAlbums = albums;
-                    console.log("recently played");
                     console.log(this.recentlyPlayedAlbums);
                 });
             }
