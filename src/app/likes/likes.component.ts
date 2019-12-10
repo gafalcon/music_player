@@ -24,24 +24,31 @@ export class LikesComponent implements OnInit {
     likeClick() {
         if (!this.enabled) {
             return;
-        }
-        if (!this.liked) {
+      }
+      //shouldn't assume liked always starts false if loading from data?
+        if (this.liked == false) {
             this.api.postLike(this.model.id, this.modelType, 'like').subscribe((res: any) => {
                 console.log(res);
                 if (res.success) {
                     this.model.totalLikes += 1;
                     this.likeEvent.emit('liked');
                 }
-                this.liked = !this.liked;
-            }, (err) => {console.log('ERROR'); console.log(err); });
-        } else {
+                this.liked = true;
+          }, (err) => { console.log('ERROR'); console.log(err); });
+          //flip dislike if it was clicked before
+          if (this.disliked == true) {
+            this.dislikeClick()
+          }
+        }
+
+        else {
             this.api.deleteLike(this.model.id, this.modelType, 'like').subscribe((res: any) => {
                 console.log(res);
                 if (res.success) {
                     this.model.totalLikes -= 1;
                     this.likeEvent.emit('unliked');
                 }
-                this.liked = !this.liked;
+                this.liked = false;
             });
         }
     }
@@ -49,23 +56,28 @@ export class LikesComponent implements OnInit {
     dislikeClick() {
         if (!this.enabled) {
             return;
-        }
-        if (!this.liked) {
+      }
+       //local variable does not track from server properly?
+        if (this.disliked == false) {
             this.model.totalDislikes += 1;
             this.api.postLike(this.model.id, this.modelType, 'dislike').subscribe((res: any) => {
                 console.log(res);
                 if (res.success) {
                     this.likeEvent.emit('disliked');
-                    this.liked = !this.liked;
+                    this.disliked = true;
                 }
             });
-        } else {
+            if (this.liked == true) {
+                this.likeClick()
+            }
+        }
+        else {
             this.model.totalDislikes -= 1;
             this.api.deleteLike(this.model.id, this.modelType, 'dislike').subscribe((res: any) => {
                 console.log(res);
                 if (res.success) {
                     this.likeEvent.emit('undisliked');
-                    this.liked = !this.liked;
+                    this.disliked = false;
                 }
             });
         }

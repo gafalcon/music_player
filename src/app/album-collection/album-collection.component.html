@@ -1,35 +1,36 @@
 <div *ngIf="collection?.length">
     <h4>{{ title }}</h4>
     <p-carousel [value]="collection" [numVisible]="4" [numScroll]="1" [dotsContainerClass]="dots">
+      <div class="grid">
         <ng-template let-album pTemplate="item">
-            <div class="song-to-add">
-                <a href="" [routerLink]="[collectionType, album.id]">
-                    <img src="{{ album.cover_art_url }}"/>
-                </a>
-                <div class="row">
-                    <div class="col" class="mx-auto">
-                        <h5>{{ album.name }}</h5>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col" class="mx-auto">
-                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                            <button type="button" class="btn btn-outline-primary" (click)="playCollection.emit(album)" >
-                                <fa-icon [icon]="faPlay"></fa-icon>
-                            </button>
-
-                            <div class="btn-group" role="group">
-                                <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                    <a class="dropdown-item" style="cursor:pointer" (click)="addToQueue.emit(album)">Add To Play Queue</a>
-                                    <a *ngIf="false" class="dropdown-item" style="cursor:pointer" (click)="addToPlaylist.emit(album)">Add to Playlist</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="song-to-add">
+            <a href="" [routerLink]="[collectionType, album.id]">
+              <img src="{{ album.cover_art_url }}" />
+            </a>
+            <div class="row">
+              <div class="col" class="mx-auto">
+                <h5>{{ album.name }}</h5>
+              </div>
             </div>
+            <div class="row">
+              <div class="col" class="mx-auto">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                  <button type="button" class="btn btn-outline-primary" (click)="playCollection.emit(album)">
+                    <fa-icon [icon]="faPlay"></fa-icon>
+                  </button>
+
+                  <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                      <a class="dropdown-item" style="cursor:pointer" (click)="addToQueue.emit(album)">Add To Play Queue</a>
+                      <a *ngIf="false" class="dropdown-item" style="cursor:pointer" (click)="addToPlaylist.emit(album)">Add to Playlist</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </ng-template>
+      </div>
     </p-carousel>
 </div>

@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\album-collection",
+    "\\src\\app\\user\\profile"
+  ],
+  "SelectedNode": "\\src\\app\\album-collection\\album-collection.component.ts",
+  "PreviewInSolutionExplorer": false
+}
