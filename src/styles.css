@@ -6,6 +6,7 @@
   2. Components
 */
 @import url('https://fonts.googleapis.com/css?family=Numans');
+@import "~@ng-select/ng-select/themes/default.theme.css";
 div#white-player {
   width: 100%;
   max-width: 375px;
@@ -292,7 +293,7 @@ div#white-player-controls {
     width: 85px;
     height: 85px;
     cursor: pointer;
-    background: url("./assets/img/play.svg"); 
+    background: url("./assets/img/play.svg");
     vertical-align: middle;
     margin-right: 16px; }
     div#white-player-controls div#play-pause.amplitude-paused {
@@ -478,7 +479,7 @@ body {
   -webkit-font-smoothing: antialiased;
   font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
   line-height: 1.5;
-  /* background-image: url('https://wallpaperplay.com/walls/full/8/f/f/342814.jpg'); */
+  background-image: url('./assets/img/background.svg');
   /* background-size: cover; */
   /* background-repeat: no-repeat; */
   height: 100%;

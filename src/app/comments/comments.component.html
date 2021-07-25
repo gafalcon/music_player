@@ -1,4 +1,4 @@
-<div class="row bootstrap snippets">
+<div class="row comment-section bootstrap snippets">
     <div class="col">
         <div class="comment-wrapper">
             <div class="panel panel-info">
@@ -15,7 +15,7 @@
                     <ul class="media-list">
                         <li class="media" *ngFor="let comment of comments">
                             <a href="#" class="pull-left">
-                                <img src="{{ comment.userPhoto }}" alt="" class="img-circle">
+                              <img src="{{ comment.userPhoto || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'}}" alt="" class="img-circle">
                             </a>
                             <div class="media-body">
                                 <span class="text-muted pull-right">

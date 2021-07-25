@@ -1,4 +1,7 @@
-
+.album-page{
+  background-color: #eee;
+  padding: 20px;
+}
 .playlist-description {
     margin-top: 20px;
 }

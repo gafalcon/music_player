@@ -1,7 +1,7 @@
 <div class="row" *ngIf="user">
     <div class="col-md-4">
-        <div class="profile-img">
-            <img [src]="user.profilePhoto" alt=""/>
+        <div class="profile-img" >
+          <img  [src]="user.profilePhoto || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'" alt="user-photo"/>
             <div class="file btn btn-lg btn-primary">
                 Change Photo
                 <input type="file" name="file"/>
