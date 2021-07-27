@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
     <div class="row" *ngIf="!isAuthRoute() ; else login">
-        <div class="col-4" >
+        <div class="col-12 col-md-4" >
             <div class="left">
                 <app-player></app-player>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-12 col-md-8">
             <router-outlet></router-outlet>
         </div>
     </div>

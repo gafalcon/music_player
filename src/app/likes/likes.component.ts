@@ -31,8 +31,10 @@ export class LikesComponent implements OnInit {
                 if (res.success) {
                     this.model.totalLikes += 1;
                     this.likeEvent.emit('liked');
+
+                  this.liked = !this.liked;
+                  this.disliked = false;
                 }
-                this.liked = !this.liked;
             }, (err) => {console.log('ERROR'); console.log(err); });
         } else {
             this.api.deleteLike(this.model.id, this.modelType, 'like').subscribe((res: any) => {
@@ -50,13 +52,14 @@ export class LikesComponent implements OnInit {
         if (!this.enabled) {
             return;
         }
-        if (!this.liked) {
+        if (!this.disliked) {
             this.model.totalDislikes += 1;
             this.api.postLike(this.model.id, this.modelType, 'dislike').subscribe((res: any) => {
                 console.log(res);
                 if (res.success) {
                     this.likeEvent.emit('disliked');
-                    this.liked = !this.liked;
+                    this.disliked = !this.disliked;
+                    this.liked = false;
                 }
             });
         } else {
@@ -65,7 +68,7 @@ export class LikesComponent implements OnInit {
                 console.log(res);
                 if (res.success) {
                     this.likeEvent.emit('undisliked');
-                    this.liked = !this.liked;
+                    this.disliked = !this.disliked;
                 }
             });
         }

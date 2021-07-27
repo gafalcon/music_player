@@ -1,6 +1,9 @@
-<div *ngIf="collection?.length">
+<div *ngIf="uniqueElems?.length">
     <h4>{{ title }}</h4>
-    <p-carousel [value]="collection" [numVisible]="collection.length > 3 ? 4 : collection.length" [numScroll]="1" [dotsContainerClass]="dots">
+    <p-carousel [value]="uniqueElems" [numVisible]="uniqueElems.length > 3 ? 4 : uniqueElems.length" [numScroll]="1"
+      [dotsContainerClass]="dots"
+      [responsiveOptions]="responsiveOptions"
+    >
         <ng-template let-album pTemplate="item">
             <div class="song-to-add">
                 <a href="" [routerLink]="[collectionType, album.id]">

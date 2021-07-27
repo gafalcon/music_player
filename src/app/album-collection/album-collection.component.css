@@ -6,11 +6,11 @@ h1 {
 
 div.song-to-add {
     /* width: 5%; */
-    width: 100%;
+    width: 95%;
     padding: 10px;
     background-color: white;
     margin: 5px;
-    max-width: 200px;
+    /* max-width: 200px; */
     border-radius: 20px;
 }
 div.song-to-add img {
@@ -31,10 +31,3 @@ div.song-to-add a.add-to-playlist-button {
     margin-top: 10px;
     font-weight: bold;
     cursor: pointer; }
-
-/* Medium only */
-@media screen and (min-width: 40em) and (max-width: 63.9375em) {
-    div.song-to-add {
-        width: 40%;
-        padding: 5px; } }
-
