@@ -24,7 +24,7 @@ export class AppComponent {
             onTokenReceived: (context) => {this.authService.googleLogin(context); }
         });
         // this.authService.testOauth();
-        console.log('Has valid token?', this.oauthService.hasValidIdToken());
+        // console.log('Has valid token?', this.oauthService.hasValidIdToken());
     }
 
     isAuthRoute() {

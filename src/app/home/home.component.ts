@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
         this.apiService.getMostLikedAlbums().subscribe( albums => this.mostLikedAlbums = albums);
         this.apiService.getMostReproducedAlbums().subscribe(albums => {
             this.mostPlayedAlbums = albums;
-            console.log(this.mostPlayedAlbums);
         });
 
         this.apiService.getRecentAlbums().subscribe(albums => this.recentAlbums = albums);
@@ -41,7 +40,6 @@ export class HomeComponent implements OnInit {
             if (user) {
                 this.apiService.getRecentlyPlayedAlbums().subscribe(albums => {
                     this.recentlyPlayedAlbums = albums;
-                    console.log(this.recentlyPlayedAlbums);
                 });
             }
         });
@@ -54,7 +52,6 @@ export class HomeComponent implements OnInit {
     }
 
     addAlbumToQueue(a: Album) {
-        console.log('Add to queue', a);
         this.apiService.getAlbum(a.id).subscribe(
             album => {
                 this.ampService.addSongs(album.songs, album.id);
@@ -71,7 +68,6 @@ export class HomeComponent implements OnInit {
     }
 
     playAlbum(album: Album) {
-        console.log("play album");
         this.ampService.playCollection(album.songs, album.id);
     }
 }

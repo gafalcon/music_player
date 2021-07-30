@@ -39,13 +39,10 @@ export class AlbumComponent implements OnInit {
         this.getData(id);
         this.auth.currentUser.subscribe((user) => {
             this.currentUser = user;
-            console.log(this.currentUser);
 
             if(this.currentUser) {
                 this.enableLikes = true;
                 this.api.isLikedDisliked(id, 'albums').subscribe((res: any) => {
-                    console.log('likes');
-                    console.log(res);
                     if (res.success) {
                         if (res.message === 'liked') {
                             this.liked = true;
@@ -66,7 +63,6 @@ export class AlbumComponent implements OnInit {
 
         this.api.getAlbumComments(id).subscribe((comments) => {
             this.comments = comments;
-            console.log(comments);
         });
 
     }
@@ -77,7 +73,6 @@ export class AlbumComponent implements OnInit {
     }
 
     createComment(comment: string) {
-        console.log('new comment!!!' + comment);
         this.api.postAlbumComment(this.album.id, {comment}).subscribe((newComment) => {
             newComment.username = this.currentUser.username;
             this.comments.unshift(newComment);
